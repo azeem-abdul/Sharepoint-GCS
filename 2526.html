@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E2E Process Management Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#ffffff',
+                        foreground: '#1a1a1a',
+                        card: '#ffffff',
+                        'card-foreground': '#1a1a1a',
+                        primary: '#030213',
+                        'primary-foreground': '#ffffff',
+                        secondary: '#f1f5f9',
+                        'secondary-foreground': '#030213',
+                        muted: '#ececf0',
+                        'muted-foreground': '#717182',
+                        accent: '#e9ebef',
+                        'accent-foreground': '#030213',
+                        destructive: '#d4183d',
+                        'destructive-foreground': '#ffffff',
+                        border: 'rgba(0, 0, 0, 0.1)',
+                        input: 'transparent',
+                        ring: '#b3b3b3',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .card:hover {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 9999px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            line-height: 1;
+            border: 1px solid transparent;
+        }
+        
+        .badge-secondary {
+            background-color: #f1f5f9;
+            color: #475569;
+        }
+        
+        .badge-outline {
+            background-color: transparent;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .status-completed {
+            background-color: #dcfce7;
+            color: #166534;
+            border-color: #bbf7d0;
+        }
+        
+        .status-in-progress {
+            background-color: #dbeafe;
+            color: #1e40af;
+            border-color: #93c5fd;
+        }
+        
+        .category-badge {
+            color: #7c3aed;
+            border-color: #c4b5fd;
+        }
+        
+        .icon {
+            width: 2rem;
+            height: 2rem;
+            fill: currentColor;
+        }
+        
+        .icon-small {
+            width: 1rem;
+            height: 1rem;
+            fill: currentColor;
+        }
+        
+        .progress-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+        }
+        
+        .progress-active {
+            background: linear-gradient(to right, #8b5cf6, #ec4899);
+        }
+        
+        .progress-inactive {
+            background-color: #e5e7eb;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #faf5ff 0%, #fdf2f8 50%, #eef2ff 100%);
+        }
+        
+        .icon-gradient {
+            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+        }
+        
+        .stats-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="container mx-auto px-6 py-12">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">
+                End-to-End Process Management
+            </h1>
+        </div>
+
+        <!-- Process Steps Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Step 1 -->
+            <div class="card rounded-2xl p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="p-3 rounded-2xl icon-gradient text-white shadow-lg">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                            <path d="M5 12c0 1.657 3.134 3 7 3s7-1.343 7-3"/>
+                            <path d="m5 5 0 14c0 1.657 3.134 3 7 3s7-1.343 7-3V5"/>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="icon-small text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                            <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                        <span class="badge status-completed">Completed</span>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <span class="badge badge-outline category-badge">Foundation</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">
+                    E2E Process Map with L3 maturity data
+                </h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Comprehensive end-to-end process mapping with level 3 maturity assessment
+                </p>
+                <div class="mt-6 pt-4 border-t border-gray-100">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Step 1 of 6</span>
+                        <div class="flex items-center gap-1">
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-inactive"></div>
+                            <div class="progress-dot progress-inactive"></div>
+                            <div class="progress-dot progress-inactive"></div>
+                            <div class="progress-dot progress-inactive"></div>
+                            <div class="progress-dot progress-inactive"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="card rounded-2xl p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="p-3 rounded-2xl icon-gradient text-white shadow-lg">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12,6 12,12 16,14"/>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="icon-small text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                            <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                        <span class="badge status-completed">Completed</span>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <span class="badge badge-outline category-badge">Governance</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">
+                    Review Cycles agreed
+                </h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Established review cycles and approval processes
+                </p>
+                <div class="mt-6 pt-4 border-t border-gray-100">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Step 2 of 6</span>
+                        <div class="flex items-center gap-1">
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-inactive"></div>
+                            <div class="progress-dot progress-inactive"></div>
+                            <div class="progress-dot progress-inactive"></div>
+                            <div class="progress-dot progress-inactive"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="card rounded-2xl p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="p-3 rounded-2xl icon-gradient text-white shadow-lg">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="icon-small text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12,6 12,12 16,14"/>
+                        </svg>
+                        <span class="badge status-in-progress">In Progress</span>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <span class="badge badge-outline category-badge">Implementation</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">
+                    E2E Architecture setup in Blueworks and SharePoint/Service Now
+                </h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Technical architecture configured across platforms
+                </p>
+                <div class="mt-6 pt-4 border-t border-gray-100">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Step 3 of 6</span>
+                        <div class="flex items-center gap-1">
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-inactive"></div>
+                            <div class="progress-dot progress-inactive"></div>
+                            <div class="progress-dot progress-inactive"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="card rounded-2xl p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="p-3 rounded-2xl icon-gradient text-white shadow-lg">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4"/>
+                            <path d="M21 12c.552 0 1.005-.449.95-.998a10.951 10.951 0 0 0-2.526-6.43c-.394-.394-.98-.394-1.374 0L16 6.622a8.017 8.017 0 0 1 3.736 5.06c.157.538.698.935 1.264.318z"/>
+                            <path d="M3 12c-.552 0-1.005-.449-.95-.998a10.951 10.951 0 0 1 2.526-6.43c.394-.394.98-.394 1.374 0L8 6.622a8.017 8.017 0 0 0-3.736 5.06C4.107 12.22 3.566 12.617 3 12z"/>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="icon-small text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12,6 12,12 16,14"/>
+                        </svg>
+                        <span class="badge status-in-progress">In Progress</span>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <span class="badge badge-outline category-badge">Analytics</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">
+                    E2E insights being delivered
+                </h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Analytics and insights from end-to-end process data
+                </p>
+                <div class="mt-6 pt-4 border-t border-gray-100">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Step 4 of 6</span>
+                        <div class="flex items-center gap-1">
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-inactive"></div>
+                            <div class="progress-dot progress-inactive"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="card rounded-2xl p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="p-3 rounded-2xl icon-gradient text-white shadow-lg">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                            <path d="M5 12c0 1.657 3.134 3 7 3s7-1.343 7-3"/>
+                            <path d="m5 5 0 14c0 1.657 3.134 3 7 3s7-1.343 7-3V5"/>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="icon-small text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                            <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                        <span class="badge status-completed">Completed</span>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <span class="badge badge-outline category-badge">Documentation</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">
+                    All L4 Maps &amp; SOPs stored in EBS repositories
+                </h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Level 4 process maps and standard operating procedures centrally stored
+                </p>
+                <div class="mt-6 pt-4 border-t border-gray-100">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Step 5 of 6</span>
+                        <div class="flex items-center gap-1">
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-inactive"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="card rounded-2xl p-8 group hover:shadow-xl transition-all duration-300">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="p-3 rounded-2xl icon-gradient text-white shadow-lg">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10,9 9,9 8,9"/>
+                        </svg>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="icon-small text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                            <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                        <span class="badge status-completed">Completed</span>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <span class="badge badge-outline category-badge">Governance</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">
+                    Process documentation assurance and governance
+                </h3>
+                <p class="text-gray-600 leading-relaxed">
+                    Quality assurance and governance framework for all process documentation
+                </p>
+                <div class="mt-6 pt-4 border-t border-gray-100">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Step 6 of 6</span>
+                        <div class="flex items-center gap-1">
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-active"></div>
+                            <div class="progress-dot progress-active"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="stats-card text-center p-8 rounded-2xl shadow-lg">
+                <div class="text-3xl font-bold text-green-600 mb-2">4</div>
+                <p class="text-gray-600">Completed Steps</p>
+            </div>
+            <div class="stats-card text-center p-8 rounded-2xl shadow-lg">
+                <div class="text-3xl font-bold text-blue-600 mb-2">2</div>
+                <p class="text-gray-600">In Progress</p>
+            </div>
+            <div class="stats-card text-center p-8 rounded-2xl shadow-lg">
+                <div class="text-3xl font-bold text-purple-600 mb-2">67%</div>
+                <p class="text-gray-600">Overall Progress</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
