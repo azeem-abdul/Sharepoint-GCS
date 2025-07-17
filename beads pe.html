@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBS Global Capabilities Bead Bracelet</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React and ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel Standalone for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        /* Custom CSS for Segoe UI font and additional styling */
+        body {
+            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Ensure the container takes full available space */
+        #root {
+            width: 100%;
+            height: 100vh;
+            min-height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        const capabilities = [
+            {
+                id: 1,
+                name: "Strategy",
+                description: "Sets ambition for EBS, identify growth opportunities, oversee progress and narrative",
+                color: "#00148C",
+                link: "https://example.com/strategy"
+            },
+            {
+                id: 2,
+                name: "Work Migration",
+                description: "Manages transition of new scope into EBS or to vendors, apply common approach to minimise business disruption",
+                color: "#00148C",
+                link: "https://example.com/work-migration"
+            },
+            {
+                id: 3,
+                name: "Service Excellence",
+                description: "Service Experience: Defines the user experience strategy for EBS, including design standards and guardrails for the service line to follow.\n\nPerformance Management: Sets service line targets with the customer, tracks and drives performance in effectiveness, efficiency and end user experience (3Es)",
+                color: "#00148C",
+                link: "https://example.com/service-excellence"
+            },
+            {
+                id: 4,
+                name: "Process Engineering",
+                description: "Identifies and delivers opportunities for process improvement to deliver a more effective and efficient service",
+                color: "#00148C",
+                link: "https://nationalgridplc.sharepoint.com/sites/GRP-MST-INT-NG-EBSGlobalCapabilities/SitePages/Process-Engineering-Capability.aspx"
+            },
+            {
+                id: 5,
+                name: "Automation",
+                description: "Identifies and delivers automation solutions to reduce time and cost to service",
+                color: "#00148C",
+                link: "https://example.com/automation"
+            },
+            {
+                id: 6,
+                name: "Commercial & Vendor Management",
+                description: "Manages relationships and service performance of our vendor network",
+                color: "#00148C",
+                link: "https://example.com/commercial-vendor-management"
+            },
+            {
+                id: 7,
+                name: "Change & Adoption",
+                description: "Drives adoption of business changes delivered by facilitating organisational addressing change fatigue and de-risking benefit realisation",
+                color: "#00148C",
+                link: "https://example.com/change-adoption"
+            },
+            {
+                id: 8,
+                name: "Projects & Programme Management",
+                description: "Manages delivery of strategic projects and programmes to ensure successful outcomes and benefit realisation",
+                color: "#00148C",
+                link: "https://example.com/projects-programme-management"
+            },
+            {
+                id: 9,
+                name: "Risk & Compliance",
+                description: "Manages EBS-wide risks, coordinates Group Compliance and Business Resilience activities",
+                color: "#00148C",
+                link: "https://example.com/risk-compliance"
+            }
+        ];
+
+        const whatWeDo = {
+            title: "Global Capabilities - What do we do?",
+            points: [
+                "Enable our service lines to maximise value through Scaling Efficiencies, Process Streamlining, Standardisation and Automation",
+                "Drive consistency and rigor in performance and risk management",
+                "Develop the core skills and capabilities needed to scale and transform EBS"
+            ]
+        };
+
+        function BeadBracelet() {
+            const [hoveredBead, setHoveredBead] = useState(null);
+
+            const radius = 200;
+            const centerX = 280;
+            const centerY = 280;
+
+            const getBeadPosition = (index, total) => {
+                const angle = (index * 2 * Math.PI) / total - Math.PI / 2;
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+                return { x, y };
+            };
+
+            const handleBeadClick = (capability) => {
+                window.open(capability.link, '_blank');
+            };
+
+            const showingDefault = !hoveredBead;
+
+            return (
+                <div className="flex items-center justify-center min-h-screen bg-gray-50 p-8">
+                    <div className="flex items-center gap-24 max-w-8xl w-full">
+                        {/* Bead Bracelet */}
+                        <div className="flex-shrink-0">
+                            <div className="relative w-[560px] h-[560px]">
+                                <svg width="560" height="560" viewBox="0 0 560 560">
+                                    {/* Connecting lines between beads */}
+                                    {capabilities.map((_, index) => {
+                                        const currentPos = getBeadPosition(index, capabilities.length);
+                                        const nextPos = getBeadPosition((index + 1) % capabilities.length, capabilities.length);
+                                        
+                                        return (
+                                            <line
+                                                key={`line-${index}`}
+                                                x1={currentPos.x}
+                                                y1={currentPos.y}
+                                                x2={nextPos.x}
+                                                y2={nextPos.y}
+                                                stroke="#d1d5db"
+                                                strokeWidth="8"
+                                            />
+                                        );
+                                    })}
+                                    
+                                    {/* Center circle with title */}
+                                    <circle
+                                        cx={centerX}
+                                        cy={centerY}
+                                        r="80"
+                                        fill="white"
+                                        stroke="#00148C"
+                                        strokeWidth="4"
+                                    />
+                                    <text
+                                        x={centerX}
+                                        y={centerY - 12}
+                                        textAnchor="middle"
+                                        className="text-lg font-medium"
+                                        fill="#00148C"
+                                    >
+                                        EBS Global
+                                    </text>
+                                    <text
+                                        x={centerX}
+                                        y={centerY + 12}
+                                        textAnchor="middle"
+                                        className="text-lg font-medium"
+                                        fill="#00148C"
+                                    >
+                                        Capabilities
+                                    </text>
+
+                                    {/* Beads */}
+                                    {capabilities.map((capability, index) => {
+                                        const position = getBeadPosition(index, capabilities.length);
+                                        const isHovered = hoveredBead?.id === capability.id;
+                                        
+                                        return (
+                                            <g key={capability.id}>
+                                                {/* Bead circle */}
+                                                <circle
+                                                    cx={position.x}
+                                                    cy={position.y}
+                                                    r={isHovered ? "55" : "50"}
+                                                    fill="#00148C"
+                                                    className="cursor-pointer transition-all duration-300"
+                                                    onMouseEnter={() => setHoveredBead(capability)}
+                                                    onMouseLeave={() => setHoveredBead(null)}
+                                                    onClick={() => handleBeadClick(capability)}
+                                                    style={{
+                                                        filter: isHovered ? 'brightness(1.1)' : 'none',
+                                                    }}
+                                                />
+                                                
+                                                {/* Bead text */}
+                                                <text
+                                                    x={position.x}
+                                                    y={position.y}
+                                                    textAnchor="middle"
+                                                    className="text-sm font-medium fill-white pointer-events-none"
+                                                    style={{ fontSize: '13px' }}
+                                                >
+                                                    {capability.name.includes('&') && capability.name.includes('Vendor') ? (
+                                                        <>
+                                                            <tspan x={position.x} dy="-14">Commercial &</tspan>
+                                                            <tspan x={position.x} dy="14">Vendor</tspan>
+                                                            <tspan x={position.x} dy="14">Management</tspan>
+                                                        </>
+                                                    ) : capability.name.includes('&') && capability.name.includes('Projects') ? (
+                                                        <>
+                                                            <tspan x={position.x} dy="-14">Projects &</tspan>
+                                                            <tspan x={position.x} dy="14">Programme</tspan>
+                                                            <tspan x={position.x} dy="14">Management</tspan>
+                                                        </>
+                                                    ) : capability.name.includes('&') ? (
+                                                        capability.name.split(' ').map((word, i) => (
+                                                            <tspan key={i} x={position.x} dy={i === 0 ? -14 : 14}>
+                                                                {word}
+                                                            </tspan>
+                                                        ))
+                                                    ) : capability.name.split(' ').length > 2 ? (
+                                                        capability.name.split(' ').map((word, i) => (
+                                                            <tspan key={i} x={position.x} dy={i === 0 ? -7 : 14}>
+                                                                {word}
+                                                            </tspan>
+                                                        ))
+                                                    ) : capability.name.split(' ').length === 2 ? (
+                                                        capability.name.split(' ').map((word, i) => (
+                                                            <tspan key={i} x={position.x} dy={i === 0 ? -7 : 14}>
+                                                                {word}
+                                                            </tspan>
+                                                        ))
+                                                    ) : (
+                                                        <tspan x={position.x} dy="5">{capability.name}</tspan>
+                                                    )}
+                                                </text>
+                                            </g>
+                                        );
+                                    })}
+                                </svg>
+                            </div>
+                        </div>
+
+                        {/* Content Panel */}
+                        <div className="flex-1 max-w-lg">
+                            <div className="bg-white rounded-lg shadow-lg p-8 border border-gray-200">
+                                {showingDefault ? (
+                                    <>
+                                        <h2 className="text-2xl font-semibold mb-6" style={{ color: '#00148C' }}>
+                                            {whatWeDo.title}
+                                        </h2>
+                                        
+                                        <div className="space-y-4">
+                                            {whatWeDo.points.map((point, index) => (
+                                                <div key={index} className="flex items-start gap-3">
+                                                    <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#00148C' }}></div>
+                                                    <p className="text-gray-700 leading-relaxed">
+                                                        {point}
+                                                    </p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        
+                                        <div className="mt-8 pt-6 border-t border-gray-100">
+                                            <p className="text-sm text-gray-500">
+                                                Click on capability circles to explore detailed information
+                                            </p>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div className="flex items-center gap-4 mb-6">
+                                            <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: '#00148C' }}>
+                                                <span className="text-white text-sm font-medium">
+                                                    {hoveredBead.id}
+                                                </span>
+                                            </div>
+                                            <h2 className="text-2xl font-semibold" style={{ color: '#00148C' }}>
+                                                {hoveredBead.name}
+                                            </h2>
+                                        </div>
+                                        
+                                        <div className="text-gray-700 leading-relaxed text-lg">
+                                            {hoveredBead.description.split('\n').map((line, index) => (
+                                                line ? (
+                                                    <p key={index} className={index > 0 ? 'mt-4' : ''}>
+                                                        {line}
+                                                    </p>
+                                                ) : (
+                                                    <div key={index} className="h-2"></div>
+                                                )
+                                            ))}
+                                        </div>
+                                        
+                                        <div className="mt-8 pt-6 border-t border-gray-100">
+                                            <p className="text-sm text-gray-500">
+                                                Move your cursor away to return to the main overview
+                                            </p>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Render the component
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<BeadBracelet />);
+    </script>
+</body>
+</html>
