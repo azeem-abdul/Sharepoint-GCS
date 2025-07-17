@@ -16,18 +16,43 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
     <style>
-        /* Custom CSS for Segoe UI font and additional styling */
+        /* SharePoint-optimized styles */
         body {
             font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
             margin: 0;
             padding: 0;
+            background: transparent; /* Better for SharePoint integration */
         }
         
-        /* Ensure the container takes full available space */
+        /* Responsive container for SharePoint */
         #root {
             width: 100%;
-            height: 100vh;
             min-height: 600px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* SharePoint-specific responsive adjustments */
+        @media (max-width: 768px) {
+            #root {
+                padding: 1rem;
+            }
+            
+            .bracelet-container {
+                flex-direction: column !important;
+                gap: 2rem !important;
+            }
+            
+            .bracelet-svg {
+                width: 100% !important;
+                height: auto !important;
+                max-width: 400px !important;
+            }
+        }
+        
+        /* Ensure proper scaling in SharePoint iframes */
+        .bracelet-container {
+            transform-origin: top left;
         }
     </style>
 </head>
@@ -35,7 +60,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState } = React;
+        const { useState, useEffect } = React;
 
         const capabilities = [
             {
@@ -43,21 +68,21 @@
                 name: "Strategy",
                 description: "Sets ambition for EBS, identify growth opportunities, oversee progress and narrative",
                 color: "#00148C",
-                link: "https://example.com/strategy"
+                link: "/sites/yoursite/SitePages/Strategy.aspx" // SharePoint internal link
             },
             {
                 id: 2,
                 name: "Work Migration",
                 description: "Manages transition of new scope into EBS or to vendors, apply common approach to minimise business disruption",
                 color: "#00148C",
-                link: "https://example.com/work-migration"
+                link: "/sites/yoursite/SitePages/Work-Migration.aspx"
             },
             {
                 id: 3,
                 name: "Service Excellence",
                 description: "Service Experience: Defines the user experience strategy for EBS, including design standards and guardrails for the service line to follow.\n\nPerformance Management: Sets service line targets with the customer, tracks and drives performance in effectiveness, efficiency and end user experience (3Es)",
                 color: "#00148C",
-                link: "https://example.com/service-excellence"
+                link: "/sites/yoursite/SitePages/Service-Excellence.aspx"
             },
             {
                 id: 4,
@@ -71,35 +96,35 @@
                 name: "Automation",
                 description: "Identifies and delivers automation solutions to reduce time and cost to service",
                 color: "#00148C",
-                link: "https://example.com/automation"
+                link: "/sites/yoursite/SitePages/Automation.aspx"
             },
             {
                 id: 6,
                 name: "Commercial & Vendor Management",
                 description: "Manages relationships and service performance of our vendor network",
                 color: "#00148C",
-                link: "https://example.com/commercial-vendor-management"
+                link: "/sites/yoursite/SitePages/Commercial-Vendor-Management.aspx"
             },
             {
                 id: 7,
                 name: "Change & Adoption",
                 description: "Drives adoption of business changes delivered by facilitating organisational addressing change fatigue and de-risking benefit realisation",
                 color: "#00148C",
-                link: "https://example.com/change-adoption"
+                link: "/sites/yoursite/SitePages/Change-Adoption.aspx"
             },
             {
                 id: 8,
                 name: "Projects & Programme Management",
                 description: "Manages delivery of strategic projects and programmes to ensure successful outcomes and benefit realisation",
                 color: "#00148C",
-                link: "https://example.com/projects-programme-management"
+                link: "/sites/yoursite/SitePages/Projects-Programme-Management.aspx"
             },
             {
                 id: 9,
                 name: "Risk & Compliance",
                 description: "Manages EBS-wide risks, coordinates Group Compliance and Business Resilience activities",
                 color: "#00148C",
-                link: "https://example.com/risk-compliance"
+                link: "/sites/yoursite/SitePages/Risk-Compliance.aspx"
             }
         ];
 
@@ -114,10 +139,22 @@
 
         function BeadBracelet() {
             const [hoveredBead, setHoveredBead] = useState(null);
+            const [isMobile, setIsMobile] = useState(false);
 
-            const radius = 200;
-            const centerX = 280;
-            const centerY = 280;
+            useEffect(() => {
+                const checkMobile = () => {
+                    setIsMobile(window.innerWidth <= 768);
+                };
+                
+                checkMobile();
+                window.addEventListener('resize', checkMobile);
+                
+                return () => window.removeEventListener('resize', checkMobile);
+            }, []);
+
+            const radius = isMobile ? 150 : 200;
+            const centerX = isMobile ? 200 : 280;
+            const centerY = isMobile ? 200 : 280;
 
             const getBeadPosition = (index, total) => {
                 const angle = (index * 2 * Math.PI) / total - Math.PI / 2;
@@ -127,18 +164,26 @@
             };
 
             const handleBeadClick = (capability) => {
-                window.open(capability.link, '_blank');
+                // Handle both internal SharePoint links and external links
+                if (capability.link.startsWith('/sites/')) {
+                    // Internal SharePoint link - open in same tab
+                    window.location.href = capability.link;
+                } else {
+                    // External link - open in new tab
+                    window.open(capability.link, '_blank');
+                }
             };
 
             const showingDefault = !hoveredBead;
+            const svgSize = isMobile ? 400 : 560;
 
             return (
-                <div className="flex items-center justify-center min-h-screen bg-gray-50 p-8">
-                    <div className="flex items-center gap-24 max-w-8xl w-full">
+                <div className="flex items-center justify-center min-h-full bg-transparent p-4">
+                    <div className={`bracelet-container flex items-center gap-${isMobile ? '8' : '24'} max-w-8xl w-full ${isMobile ? 'flex-col' : ''}`}>
                         {/* Bead Bracelet */}
                         <div className="flex-shrink-0">
-                            <div className="relative w-[560px] h-[560px]">
-                                <svg width="560" height="560" viewBox="0 0 560 560">
+                            <div className={`relative bracelet-svg`} style={{ width: svgSize, height: svgSize }}>
+                                <svg width={svgSize} height={svgSize} viewBox={`0 0 ${svgSize} ${svgSize}`}>
                                     {/* Connecting lines between beads */}
                                     {capabilities.map((_, index) => {
                                         const currentPos = getBeadPosition(index, capabilities.length);
@@ -161,25 +206,25 @@
                                     <circle
                                         cx={centerX}
                                         cy={centerY}
-                                        r="80"
+                                        r={isMobile ? "60" : "80"}
                                         fill="white"
                                         stroke="#00148C"
                                         strokeWidth="4"
                                     />
                                     <text
                                         x={centerX}
-                                        y={centerY - 12}
+                                        y={centerY - (isMobile ? 8 : 12)}
                                         textAnchor="middle"
-                                        className="text-lg font-medium"
+                                        className={`${isMobile ? 'text-base' : 'text-lg'} font-medium`}
                                         fill="#00148C"
                                     >
                                         EBS Global
                                     </text>
                                     <text
                                         x={centerX}
-                                        y={centerY + 12}
+                                        y={centerY + (isMobile ? 8 : 12)}
                                         textAnchor="middle"
-                                        className="text-lg font-medium"
+                                        className={`${isMobile ? 'text-base' : 'text-lg'} font-medium`}
                                         fill="#00148C"
                                     >
                                         Capabilities
@@ -189,6 +234,8 @@
                                     {capabilities.map((capability, index) => {
                                         const position = getBeadPosition(index, capabilities.length);
                                         const isHovered = hoveredBead?.id === capability.id;
+                                        const beadRadius = isMobile ? 40 : 50;
+                                        const hoveredRadius = isMobile ? 44 : 55;
                                         
                                         return (
                                             <g key={capability.id}>
@@ -196,7 +243,7 @@
                                                 <circle
                                                     cx={position.x}
                                                     cy={position.y}
-                                                    r={isHovered ? "55" : "50"}
+                                                    r={isHovered ? hoveredRadius : beadRadius}
                                                     fill="#00148C"
                                                     className="cursor-pointer transition-all duration-300"
                                                     onMouseEnter={() => setHoveredBead(capability)}
@@ -213,7 +260,7 @@
                                                     y={position.y}
                                                     textAnchor="middle"
                                                     className="text-sm font-medium fill-white pointer-events-none"
-                                                    style={{ fontSize: '13px' }}
+                                                    style={{ fontSize: isMobile ? '11px' : '13px' }}
                                                 >
                                                     {capability.name.includes('&') && capability.name.includes('Vendor') ? (
                                                         <>
@@ -258,7 +305,7 @@
 
                         {/* Content Panel */}
                         <div className="flex-1 max-w-lg">
-                            <div className="bg-white rounded-lg shadow-lg p-8 border border-gray-200">
+                            <div className="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
                                 {showingDefault ? (
                                     <>
                                         <h2 className="text-2xl font-semibold mb-6" style={{ color: '#00148C' }}>
