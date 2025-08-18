@@ -1,191 +1,301 @@
-<!-- SharePoint-Optimized Timeline - Paste this into Script Editor Web Part -->
-<div style="width: 100%; max-width: 1000px; margin: 0 auto; padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #ffffff;">
-    <!-- Header -->
-    <div style="text-align: center; margin-bottom: 40px;">
-        <h2 style="font-size: 24px; font-weight: 600; color: #323130; margin-bottom: 8px; line-height: 1.4;">25/26 Outcomes Timeline</h2>
-        <p style="color: #605e5c; font-size: 14px; line-height: 1.5; max-width: 700px; margin: 0 auto;">
-            Our aim during 25/26 is for all Service Lines to have the following outcomes in place. 
-            The Process Improvement team are in the process of engaging Service Lines leaders to create plans to close any gaps to achieve all outcomes.
-        </p>
-    </div>
-
-    <!-- Timeline Container -->
-    <div style="position: relative;">
-        <!-- Timeline Line -->
-        <div style="position: absolute; left: 30px; top: 30px; bottom: 30px; width: 2px; background: #edebe9; z-index: 1;"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25/26 Outcomes Timeline</title>
+    <style>
+        /* Tailwind-inspired styles for SharePoint compatibility */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
-        <!-- Timeline Items -->
-        <div style="display: flex; flex-direction: column; gap: 25px;">
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #1f2937;
+            background-color: #ffffff;
+        }
+        
+        .timeline-container {
+            width: 100%;
+            max-width: 64rem;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: #6b7280;
+            max-width: 48rem;
+            margin: 0 auto;
+        }
+        
+        .timeline {
+            position: relative;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 2rem;
+            top: 2rem;
+            bottom: 2rem;
+            width: 2px;
+            background-color: #e5e7eb;
+            z-index: 0;
+        }
+        
+        .timeline-items {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .timeline-item {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .timeline-item:hover {
+            transform: translateX(4px);
+        }
+        
+        .timeline-dot {
+            position: relative;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.1);
+        }
+        
+        .timeline-dot svg {
+            width: 2rem;
+            height: 2rem;
+            color: white;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .timeline-item:hover .timeline-content {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-color: #3b82f6;
+        }
+        
+        .outcome-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .outcome-number {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #6b7280;
+        }
+        
+        .outcome-indicator {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+        }
+        
+        .outcome-title {
+            font-weight: 500;
+            color: #1f2937;
+            line-height: 1.4;
+        }
+        
+        /* Color schemes for each outcome */
+        .outcome-1 .timeline-dot { background-color: #3b82f6; }
+        .outcome-1 .outcome-indicator { background-color: #3b82f6; }
+        
+        .outcome-2 .timeline-dot { background-color: #10b981; }
+        .outcome-2 .outcome-indicator { background-color: #10b981; }
+        
+        .outcome-3 .timeline-dot { background-color: #8b5cf6; }
+        .outcome-3 .outcome-indicator { background-color: #8b5cf6; }
+        
+        .outcome-4 .timeline-dot { background-color: #f59e0b; }
+        .outcome-4 .outcome-indicator { background-color: #f59e0b; }
+        
+        .outcome-5 .timeline-dot { background-color: #14b8a6; }
+        .outcome-5 .outcome-indicator { background-color: #14b8a6; }
+        
+        .outcome-6 .timeline-dot { background-color: #ef4444; }
+        .outcome-6 .outcome-indicator { background-color: #ef4444; }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .timeline-container {
+                padding: 1rem;
+            }
             
-            <!-- Outcome 1 -->
-            <div style="position: relative; display: flex; align-items: flex-start; gap: 20px; transition: transform 0.2s ease;" 
-                 onmouseover="this.style.transform='translateX(5px)'" 
-                 onmouseout="this.style.transform='translateX(0)'">
-                <div style="position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #0078d4; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s ease;"
-                     onmouseover="this.style.transform='scale(1.1)'" 
-                     onmouseout="this.style.transform='scale(1)'">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                        <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
-                    </svg>
-                </div>
-                <div style="flex: 1; background: white; border: 1px solid #edebe9; border-radius: 4px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: all 0.2s ease;"
-                     onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'; this.style.borderColor='#0078d4';" 
-                     onmouseout="this.style.boxShadow='0 1px 3px rgba(0,0,0,0.1)'; this.style.borderColor='#edebe9';">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                        <span style="font-size: 12px; font-weight: 600; color: #605e5c;">Outcome 1</span>
-                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #0078d4;"></div>
+            .timeline-line {
+                left: 1.5rem;
+            }
+            
+            .timeline-dot {
+                width: 3rem;
+                height: 3rem;
+            }
+            
+            .timeline-dot svg {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+            
+            .timeline-items {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="timeline-container">
+        <div class="header">
+            <h1>25/26 Outcomes Timeline</h1>
+            <p>Our aim during 25/26 is for all Service Lines to have the following outcomes in place. The Process Improvement team are in the process of engaging Service Lines leaders to create plans to close any gaps to achieve all outcomes.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-line"></div>
+            
+            <div class="timeline-items">
+                <!-- Outcome 1 -->
+                <div class="timeline-item outcome-1">
+                    <div class="timeline-dot">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+                        </svg>
                     </div>
-                    <h3 style="font-weight: 600; color: #323130; line-height: 1.4; margin: 0; font-size: 16px;">
-                        E2E Process Map with L3 maturity data
-                    </h3>
+                    <div class="timeline-content">
+                        <div class="outcome-badge">
+                            <span class="outcome-number">Outcome 1</span>
+                            <div class="outcome-indicator"></div>
+                        </div>
+                        <h3 class="outcome-title">E2E Process Map with L3 maturity data</h3>
+                    </div>
+                </div>
+
+                <!-- Outcome 2 -->
+                <div class="timeline-item outcome-2">
+                    <div class="timeline-dot">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="outcome-badge">
+                            <span class="outcome-number">Outcome 2</span>
+                            <div class="outcome-indicator"></div>
+                        </div>
+                        <h3 class="outcome-title">Review Cycles Agreed</h3>
+                    </div>
+                </div>
+
+                <!-- Outcome 3 -->
+                <div class="timeline-item outcome-3">
+                    <div class="timeline-dot">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="outcome-badge">
+                            <span class="outcome-number">Outcome 3</span>
+                            <div class="outcome-indicator"></div>
+                        </div>
+                        <h3 class="outcome-title">E2E Architecture setup in Blueworks and SharePoint/Service Now</h3>
+                    </div>
+                </div>
+
+                <!-- Outcome 4 -->
+                <div class="timeline-item outcome-4">
+                    <div class="timeline-dot">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="outcome-badge">
+                            <span class="outcome-number">Outcome 4</span>
+                            <div class="outcome-indicator"></div>
+                        </div>
+                        <h3 class="outcome-title">E2E insights being delivered</h3>
+                    </div>
+                </div>
+
+                <!-- Outcome 5 -->
+                <div class="timeline-item outcome-5">
+                    <div class="timeline-dot">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2m-6 4l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="outcome-badge">
+                            <span class="outcome-number">Outcome 5</span>
+                            <div class="outcome-indicator"></div>
+                        </div>
+                        <h3 class="outcome-title">All L4 Maps & SOPs stored in EBS repositories, linked to E2E Process Map</h3>
+                    </div>
+                </div>
+
+                <!-- Outcome 6 -->
+                <div class="timeline-item outcome-6">
+                    <div class="timeline-dot">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="outcome-badge">
+                            <span class="outcome-number">Outcome 6</span>
+                            <div class="outcome-indicator"></div>
+                        </div>
+                        <h3 class="outcome-title">Process documentation assurance and governance</h3>
+                    </div>
                 </div>
             </div>
-
-            <!-- Outcome 2 -->
-            <div style="position: relative; display: flex; align-items: flex-start; gap: 20px; transition: transform 0.2s ease;" 
-                 onmouseover="this.style.transform='translateX(5px)'" 
-                 onmouseout="this.style.transform='translateX(0)'">
-                <div style="position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #107c10; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s ease;"
-                     onmouseover="this.style.transform='scale(1.1)'" 
-                     onmouseout="this.style.transform='scale(1)'">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                        <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                    </svg>
-                </div>
-                <div style="flex: 1; background: white; border: 1px solid #edebe9; border-radius: 4px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: all 0.2s ease;"
-                     onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'; this.style.borderColor='#107c10';" 
-                     onmouseout="this.style.boxShadow='0 1px 3px rgba(0,0,0,0.1)'; this.style.borderColor='#edebe9';">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                        <span style="font-size: 12px; font-weight: 600; color: #605e5c;">Outcome 2</span>
-                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #107c10;"></div>
-                    </div>
-                    <h3 style="font-weight: 600; color: #323130; line-height: 1.4; margin: 0; font-size: 16px;">
-                        Review Cycles Agreed
-                    </h3>
-                </div>
-            </div>
-
-            <!-- Outcome 3 -->
-            <div style="position: relative; display: flex; align-items: flex-start; gap: 20px; transition: transform 0.2s ease;" 
-                 onmouseover="this.style.transform='translateX(5px)'" 
-                 onmouseout="this.style.transform='translateX(0)'">
-                <div style="position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #5c2d91; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s ease;"
-                     onmouseover="this.style.transform='scale(1.1)'" 
-                     onmouseout="this.style.transform='scale(1)'">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
-                </div>
-                <div style="flex: 1; background: white; border: 1px solid #edebe9; border-radius: 4px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: all 0.2s ease;"
-                     onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'; this.style.borderColor='#5c2d91';" 
-                     onmouseout="this.style.boxShadow='0 1px 3px rgba(0,0,0,0.1)'; this.style.borderColor='#edebe9';">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                        <span style="font-size: 12px; font-weight: 600; color: #605e5c;">Outcome 3</span>
-                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #5c2d91;"></div>
-                    </div>
-                    <h3 style="font-weight: 600; color: #323130; line-height: 1.4; margin: 0; font-size: 16px;">
-                        E2E Architecture setup in Blueworks and SharePoint/Service Now
-                    </h3>
-                </div>
-            </div>
-
-            <!-- Outcome 4 -->
-            <div style="position: relative; display: flex; align-items: flex-start; gap: 20px; transition: transform 0.2s ease;" 
-                 onmouseover="this.style.transform='translateX(5px)'" 
-                 onmouseout="this.style.transform='translateX(0)'">
-                <div style="position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #ff8c00; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s ease;"
-                     onmouseover="this.style.transform='scale(1.1)'" 
-                     onmouseout="this.style.transform='scale(1)'">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                        <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                    </svg>
-                </div>
-                <div style="flex: 1; background: white; border: 1px solid #edebe9; border-radius: 4px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: all 0.2s ease;"
-                     onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'; this.style.borderColor='#ff8c00';" 
-                     onmouseout="this.style.boxShadow='0 1px 3px rgba(0,0,0,0.1)'; this.style.borderColor='#edebe9';">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                        <span style="font-size: 12px; font-weight: 600; color: #605e5c;">Outcome 4</span>
-                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #ff8c00;"></div>
-                    </div>
-                    <h3 style="font-weight: 600; color: #323130; line-height: 1.4; margin: 0; font-size: 16px;">
-                        E2E insights being delivered
-                    </h3>
-                </div>
-            </div>
-
-            <!-- Outcome 5 -->
-            <div style="position: relative; display: flex; align-items: flex-start; gap: 20px; transition: transform 0.2s ease;" 
-                 onmouseover="this.style.transform='translateX(5px)'" 
-                 onmouseout="this.style.transform='translateX(0)'">
-                <div style="position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #008575; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s ease;"
-                     onmouseover="this.style.transform='scale(1.1)'" 
-                     onmouseout="this.style.transform='scale(1)'">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                        <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"/>
-                        <path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2m-6 4l2 2 4-4"/>
-                    </svg>
-                </div>
-                <div style="flex: 1; background: white; border: 1px solid #edebe9; border-radius: 4px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: all 0.2s ease;"
-                     onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'; this.style.borderColor='#008575';" 
-                     onmouseout="this.style.boxShadow='0 1px 3px rgba(0,0,0,0.1)'; this.style.borderColor='#edebe9';">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                        <span style="font-size: 12px; font-weight: 600; color: #605e5c;">Outcome 5</span>
-                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #008575;"></div>
-                    </div>
-                    <h3 style="font-weight: 600; color: #323130; line-height: 1.4; margin: 0; font-size: 16px;">
-                        All L4 Maps & SOPs stored in EBS repositories, linked to E2E Process Map
-                    </h3>
-                </div>
-            </div>
-
-            <!-- Outcome 6 -->
-            <div style="position: relative; display: flex; align-items: flex-start; gap: 20px; transition: transform 0.2s ease;" 
-                 onmouseover="this.style.transform='translateX(5px)'" 
-                 onmouseout="this.style.transform='translateX(0)'">
-                <div style="position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #d13438; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s ease;"
-                     onmouseover="this.style.transform='scale(1.1)'" 
-                     onmouseout="this.style.transform='scale(1)'">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                    </svg>
-                </div>
-                <div style="flex: 1; background: white; border: 1px solid #edebe9; border-radius: 4px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: all 0.2s ease;"
-                     onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'; this.style.borderColor='#d13438';" 
-                     onmouseout="this.style.boxShadow='0 1px 3px rgba(0,0,0,0.1)'; this.style.borderColor='#edebe9';">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                        <span style="font-size: 12px; font-weight: 600; color: #605e5c;">Outcome 6</span>
-                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #d13438;"></div>
-                    </div>
-                    <h3 style="font-weight: 600; color: #323130; line-height: 1.4; margin: 0; font-size: 16px;">
-                        Process documentation assurance and governance
-                    </h3>
-                </div>
-            </div>
-
         </div>
     </div>
-</div>
-
-<!-- Mobile Responsive Styles -->
-<style>
-@media (max-width: 768px) {
-    .timeline-container {
-        padding: 15px !important;
-    }
-    .timeline-item {
-        gap: 15px !important;
-    }
-    .timeline-dot {
-        width: 50px !important;
-        height: 50px !important;
-    }
-    .timeline-dot svg {
-        width: 24px !important;
-        height: 24px !important;
-    }
-    .timeline-line {
-        left: 25px !important;
-    }
-}
-</style>
+</body>
+</html>
