@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EBS Process Improvement</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- React and ReactDOM -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <!-- Babel Standalone for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    }
+    
+    #root {
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* Custom Tailwind Configuration */
+    .tab-trigger {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: white;
+      border: 1px solid #e5e7eb;
+    }
+    
+    .tab-trigger:hover {
+      background: #f3f4f6;
+    }
+    
+    .tab-trigger[data-active="true"] {
+      background: #3b82f6;
+      color: white;
+      border-color: #3b82f6;
+    }
+    
+    .sub-tab-trigger {
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #f9fafb;
+      font-size: 0.875rem;
+    }
+    
+    .sub-tab-trigger:hover {
+      background: #e5e7eb;
+    }
+    
+    .sub-tab-trigger[data-active="true"] {
+      background: #1f2937;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+    const { Settings, Mail, Phone, ExternalLink, FileText } = lucide;
+
+    // Process Improvement Data
+    const processImprovementData = [
+      {
+        id: 'fundamentals',
+        title: 'Process Fundamentals',
+        description: 'What we ensure',
+        sections: {
+          'services-offered': {
+            title: 'Services We Offer',
+            description: '',
+            items: [
+              'Providing standards for mapping (across the lifecycle)',
+              'Providing standards for SOP\'s and Work instructions',
+              'Providing a central platform for process assets (Blueworks live)',
+              'Providing a central repository for key documentation (SOP Library)',
+              'Bespoke mapping of processes (subject to resource capacity)',
+              'Training and guidance on BWL and SOP approach/templates',
+              'Oversight of processes across the group (8 service lines)',
+              'Acting as the guardian over EBS Process Assets'
+            ]
+          },
+          'what-you-get': {
+            title: 'What You Get',
+            description: 'Current Compliance Scores by Service Line',
+            items: [
+              'PtP (Procure to Pay): 50% compliance',
+              'OtC (Order to Cash): 50% compliance', 
+              'ED (Electricity Distribution): 25% compliance',
+              'RTR (Record to Report): 50% compliance',
+              'PS (People Services): 37.5% compliance',
+              'ESS (Employee Self Service): 0% compliance',
+              'L&P (Land and Property): 12.5% compliance',
+              'ITSD (IT Service Desk): 12.5% compliance'
+            ]
+          },
+          'key-contacts': {
+            title: 'Key Contacts',
+            description: '',
+            contacts: [
+              {
+                name: 'Dean Clark',
+                role: '',
+                email: ''
+              },
+              {
+                name: 'Karen Watkins',
+                role: '',
+                email: ''
+              }
+            ]
+          },
+          'tools-templates': {
+            title: 'Supporting Files',
+            description: '',
+            resources: [
+              {
+                title: 'A3 Template',
+                url: '#',
+                description: ''
+              },
+              {
+                title: 'SOP Template',
+                url: '#',
+                description: ''
+              }
+            ]
+          }
+        }
+      },
+      {
+        id: 'engineering-automation',
+        title: 'Process Engineering & Automation',
+        description: 'How we streamline and digitise our processes',
+        sections: {
+          'services-offered': {
+            title: 'Services We Offer',
+            description: 'Advanced process engineering and automation solutions',
+            items: [
+              'Process automation design and implementation',
+              'Digital workflow optimization',
+              'RPA (Robotic Process Automation) solutions',
+              'System integration and API development',
+              'Data analytics and process intelligence',
+              'Change management for digital transformation'
+            ]
+          },
+          'what-you-get': {
+            title: 'What You Get',
+            description: 'Expected outcomes from our engineering services',
+            items: [
+              'Reduced manual processing time by up to 70%',
+              'Improved accuracy and reduced errors',
+              'Scalable automated solutions',
+              'Real-time process monitoring dashboards',
+              'Standardized digital workflows',
+              'Enhanced data quality and reporting'
+            ]
+          },
+          'key-contacts': {
+            title: 'Key Contacts',
+            description: 'Your Process Engineering & Automation team',
+            contacts: [
+              {
+                name: 'Engineering Lead',
+                role: 'Senior Process Engineer',
+                email: 'engineering.lead@ebs.com'
+              },
+              {
+                name: 'Automation Specialist',
+                role: 'RPA Developer',
+                email: 'automation.specialist@ebs.com'
+              }
+            ]
+          },
+          'tools-templates': {
+            title: 'Supporting Files',
+            description: 'Engineering tools and automation resources',
+            resources: [
+              {
+                title: 'Automation Assessment Template',
+                url: '#',
+                description: 'Template for evaluating automation opportunities'
+              },
+              {
+                title: 'Integration Guide',
+                url: '#',
+                description: 'Best practices for system integration'
+              }
+            ]
+          }
+        }
+      }
+    ];
+
+    // Card Component
+    const Card = ({ children, className = '' }) => (
+      <div className={`bg-white rounded-lg shadow ${className}`}>
+        {children}
+      </div>
+    );
+
+    // Badge Component
+    const Badge = ({ children, variant = 'default', className = '' }) => {
+      const variants = {
+        default: 'bg-gray-900 text-white',
+        secondary: 'bg-gray-100 text-gray-900'
+      };
+      
+      return (
+        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${variants[variant]} ${className}`}>
+          {children}
+        </span>
+      );
+    };
+
+    // Division Card Component
+    const DivisionCard = ({ division }) => {
+      const [activeTab, setActiveTab] = useState('services');
+
+      const sections = division.sections;
+      const servicesSection = sections['services-offered'];
+      const whatYouGetSection = sections['what-you-get'];
+      const contactsSection = sections['key-contacts'];
+      const filesSection = sections['tools-templates'];
+
+      const getDivisionColor = (divisionId) => {
+        switch (divisionId) {
+          case 'fundamentals':
+            return 'from-blue-500 to-blue-600';
+          case 'engineering-automation':
+            return 'from-indigo-500 to-indigo-600';
+          default:
+            return 'from-gray-500 to-gray-600';
+        }
+      };
+
+      return (
+        <Card className="p-6 shadow-lg">
+          {/* Division Header */}
+          <div className="mb-6">
+            <div className="flex items-center space-x-3 mb-3">
+              <div className={`w-10 h-10 bg-gradient-to-br ${getDivisionColor(division.id)} rounded-lg flex items-center justify-center`}>
+                <i data-lucide="settings" className="w-5 h-5 text-white"></i>
+              </div>
+              <div>
+                <h2 className="text-xl font-medium text-gray-900">{division.title}</h2>
+                <p className="text-sm text-gray-600">{division.description}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Sub-Tabs */}
+          <div className="w-full">
+            <div className="grid grid-cols-3 gap-2 mb-6">
+              <button
+                className="sub-tab-trigger"
+                data-active={activeTab === 'services'}
+                onClick={() => setActiveTab('services')}
+              >
+                Services & Outcomes
+              </button>
+              <button
+                className="sub-tab-trigger"
+                data-active={activeTab === 'contacts'}
+                onClick={() => setActiveTab('contacts')}
+              >
+                Contacts & Files
+              </button>
+              <button
+                className="sub-tab-trigger"
+                data-active={activeTab === 'more'}
+                onClick={() => setActiveTab('more')}
+              >
+                More Information
+              </button>
+            </div>
+
+            {/* Services & Outcomes Tab */}
+            {activeTab === 'services' && (
+              <div className="space-y-6">
+                {servicesSection && (
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-900 mb-3">{servicesSection.title}</h3>
+                    {servicesSection.description && (
+                      <p className="text-sm text-gray-600 mb-4">{servicesSection.description}</p>
+                    )}
+                    <div className="space-y-2">
+                      {servicesSection.items?.map((item, index) => (
+                        <div key={index} className="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                          <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                          <p className="text-sm text-gray-700">{item}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {whatYouGetSection && (
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-900 mb-3">{whatYouGetSection.title}</h3>
+                    {whatYouGetSection.description && (
+                      <p className="text-sm text-gray-600 mb-4">{whatYouGetSection.description}</p>
+                    )}
+                    <div className="space-y-2">
+                      {whatYouGetSection.items?.map((item, index) => (
+                        <div key={index} className="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                          <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full mt-2 flex-shrink-0"></div>
+                          <p className="text-sm text-gray-700">{item}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Contacts & Files Tab */}
+            {activeTab === 'contacts' && (
+              <div className="space-y-6">
+                {contactsSection && contactsSection.contacts && (
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-900 mb-4">{contactsSection.title}</h3>
+                    <div className="grid grid-cols-1 gap-4">
+                      {contactsSection.contacts.map((contact, index) => (
+                        <div key={index} className="p-4 bg-white rounded-lg border border-gray-200">
+                          <div className="flex items-start space-x-3">
+                            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-medium flex-shrink-0">
+                              {contact.name.split(' ').map(n => n[0]).join('')}
+                            </div>
+                            <div className="flex-1">
+                              <h4 className="font-medium text-gray-900">{contact.name}</h4>
+                              {contact.role && <p className="text-sm text-gray-600 mt-1">{contact.role}</p>}
+                              {contact.email && (
+                                <div className="flex items-center space-x-2 text-sm text-gray-600 mt-2">
+                                  <i data-lucide="mail" className="w-4 h-4"></i>
+                                  <a href={`mailto:${contact.email}`} className="hover:text-blue-600 transition-colors">
+                                    {contact.email}
+                                  </a>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {filesSection && filesSection.resources && (
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-900 mb-4">{filesSection.title}</h3>
+                    <div className="grid grid-cols-1 gap-4">
+                      {filesSection.resources.map((resource, index) => (
+                        <div key={index} className="p-4 bg-white rounded-lg border border-gray-200 hover:border-blue-400 transition-colors">
+                          <div className="flex items-start justify-between">
+                            <div className="flex items-start space-x-3 flex-1">
+                              <i data-lucide="file-text" className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
+                              <div>
+                                <h4 className="font-medium text-gray-900">{resource.title}</h4>
+                                {resource.description && (
+                                  <p className="text-sm text-gray-600 mt-1">{resource.description}</p>
+                                )}
+                              </div>
+                            </div>
+                            {resource.url !== '#' && (
+                              <a href={resource.url} className="ml-4 text-blue-600 hover:text-blue-800 transition-colors">
+                                <i data-lucide="external-link" className="w-4 h-4"></i>
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* More Information Tab */}
+            {activeTab === 'more' && (
+              <div className="space-y-4">
+                <div className="p-6 bg-white rounded-lg border border-gray-200">
+                  <h3 className="text-lg font-medium text-gray-900 mb-3">About {division.title}</h3>
+                  <p className="text-sm text-gray-700 leading-relaxed mb-4">
+                    {division.description}
+                  </p>
+                  <div className="space-y-3">
+                    <div className="flex items-start space-x-2">
+                      <Badge variant="secondary" className="mt-0.5">Team Focus</Badge>
+                      <p className="text-sm text-gray-600">
+                        Ensuring EBS has the necessary standards, capabilities & governance
+                      </p>
+                    </div>
+                    <div className="flex items-start space-x-2">
+                      <Badge variant="secondary" className="mt-0.5">Goal</Badge>
+                      <p className="text-sm text-gray-600">
+                        Enable service lines to streamline and digitise their processes
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </Card>
+      );
+    };
+
+    // Main App Component
+    const App = () => {
+      const [activeMainTab, setActiveMainTab] = useState('fundamentals');
+
+      React.useEffect(() => {
+        lucide.createIcons();
+      });
+
+      return (
+        <div className="min-h-screen w-full bg-gradient-to-br from-gray-50 to-blue-50 p-8">
+          <div className="mb-8">
+            <h1 className="text-3xl font-medium text-blue-900 mb-2">Process Improvement</h1>
+            <p className="text-gray-600 leading-relaxed max-w-4xl">
+              The Process Improvement teams ensure EBS has the necessary standards, capabilities & governance to enable the service lines to streamline and digitise their processes.
+            </p>
+          </div>
+          
+          {/* Top Level Division Tabs */}
+          <div className="w-full">
+            <div className="grid grid-cols-2 gap-4 mb-8">
+              <button
+                className="tab-trigger"
+                data-active={activeMainTab === 'fundamentals'}
+                onClick={() => setActiveMainTab('fundamentals')}
+              >
+                <div className="text-center py-2">
+                  <div className="font-medium">Process Fundamentals</div>
+                  <div className="text-xs opacity-80 mt-1">What we ensure</div>
+                </div>
+              </button>
+              <button
+                className="tab-trigger"
+                data-active={activeMainTab === 'engineering-automation'}
+                onClick={() => setActiveMainTab('engineering-automation')}
+              >
+                <div className="text-center py-2">
+                  <div className="font-medium">Process Engineering & Automation</div>
+                  <div className="text-xs opacity-80 mt-1">How we streamline and digitise</div>
+                </div>
+              </button>
+            </div>
+
+            {/* Tab Content */}
+            {activeMainTab === 'fundamentals' && (
+              <DivisionCard division={processImprovementData[0]} />
+            )}
+            {activeMainTab === 'engineering-automation' && (
+              <DivisionCard division={processImprovementData[1]} />
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    // Render the app
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+    
+    // Initialize Lucide icons after render
+    setTimeout(() => {
+      lucide.createIcons();
+    }, 100);
+  </script>
+</body>
+</html>
