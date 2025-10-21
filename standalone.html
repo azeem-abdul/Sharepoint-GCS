@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Scorecard Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            font-size: 14px;
+            background-color: #f9fafb;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .scorecard-container {
+            width: 100%;
+            max-width: 48rem;
+            margin: 0 auto;
+        }
+
+        .scorecard {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 3rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            border: 1px solid #f3f4f6;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 1.875rem;
+            color: #111827;
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+        }
+
+        .header p {
+            color: #6b7280;
+            font-weight: 400;
+        }
+
+        .services {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .service-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .service-info {
+            width: 6rem;
+            flex-shrink: 0;
+        }
+
+        .service-code {
+            color: #111827;
+            font-weight: 500;
+        }
+
+        .service-name {
+            color: #6b7280;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        .slider-container {
+            flex: 1;
+            max-width: 28rem;
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .slider-track {
+            display: flex;
+            gap: 0.125rem;
+            width: 100%;
+        }
+
+        .slider-segment {
+            flex: 1;
+            height: 0.75rem;
+            border-radius: 0.125rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider-progress {
+            height: 100%;
+            transition: width 0.5s ease-out;
+        }
+
+        .score-value {
+            width: 3rem;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .score-value span {
+            color: #111827;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .scorecard {
+                padding: 2rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .service-row {
+                gap: 1rem;
+            }
+            
+            .service-info {
+                width: 5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .service-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+            
+            .service-info {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .score-value {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scorecard-container">
+        <div class="scorecard">
+            <!-- Header -->
+            <div class="header">
+                <h1>Process Fundamentals</h1>
+                <p>Level of compliance to EBS Global Standards</p>
+            </div>
+
+            <!-- Service Lines -->
+            <div class="services" id="services">
+                <!-- Services will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Service data
+        const serviceData = [
+            { serviceLine: 'PtP', fullName: 'Procure to Pay', score: 50 },
+            { serviceLine: 'OtC', fullName: 'Order to Cash', score: 50 },
+            { serviceLine: 'ED', fullName: 'Electricity Distribution', score: 25 },
+            { serviceLine: 'RTR', fullName: 'Record to Report', score: 50 },
+            { serviceLine: 'PS', fullName: 'People Services', score: 37.5 },
+            { serviceLine: 'ESS', fullName: 'Employee Self Service', score: 0 },
+            { serviceLine: 'L&P', fullName: 'Land and Property', score: 12.5 },
+            { serviceLine: 'ITSD', fullName: 'IT Service Desk', score: 12.5 }
+        ];
+
+        // Color scheme for segments
+        const segmentColors = [
+            { light: '#fecaca', bright: '#dc2626' }, // Red (0-12.5%)
+            { light: '#fecaca', bright: '#dc2626' }, // Red (12.5-25%)
+            { light: '#fed7aa', bright: '#ea580c' }, // Orange (25-37.5%)
+            { light: '#fed7aa', bright: '#ea580c' }, // Orange (37.5-50%)
+            { light: '#fef3c7', bright: '#d97706' }, // Yellow (50-62.5%)
+            { light: '#fef3c7', bright: '#d97706' }, // Yellow (62.5-75%)
+            { light: '#dcfce7', bright: '#16a34a' }, // Green (75-87.5%)
+            { light: '#dcfce7', bright: '#16a34a' }  // Green (87.5-100%)
+        ];
+
+        // Create slider for a service
+        function createSlider(service) {
+            const sliderContainer = document.createElement('div');
+            sliderContainer.className = 'slider-container';
+
+            const slider = document.createElement('div');
+            slider.className = 'slider';
+
+            const track = document.createElement('div');
+            track.className = 'slider-track';
+
+            // Create 8 segments
+            for (let i = 0; i < 8; i++) {
+                const segment = document.createElement('div');
+                segment.className = 'slider-segment';
+                segment.style.backgroundColor = segmentColors[i].light;
+
+                const progress = document.createElement('div');
+                progress.className = 'slider-progress';
+                progress.style.backgroundColor = segmentColors[i].bright;
+
+                // Calculate progress for this segment
+                const segmentStart = i * 12.5;
+                const segmentEnd = (i + 1) * 12.5;
+                const segmentProgress = Math.max(0, Math.min(100, ((service.score - segmentStart) / 12.5) * 100));
+
+                if (service.score > segmentStart) {
+                    progress.style.width = segmentProgress + '%';
+                } else {
+                    progress.style.width = '0%';
+                }
+
+                segment.appendChild(progress);
+                track.appendChild(segment);
+            }
+
+            slider.appendChild(track);
+            sliderContainer.appendChild(slider);
+            return sliderContainer;
+        }
+
+        // Create service row
+        function createServiceRow(service) {
+            const row = document.createElement('div');
+            row.className = 'service-row';
+
+            // Service info
+            const serviceInfo = document.createElement('div');
+            serviceInfo.className = 'service-info';
+            
+            const serviceCode = document.createElement('div');
+            serviceCode.className = 'service-code';
+            serviceCode.textContent = service.serviceLine;
+            
+            const serviceName = document.createElement('div');
+            serviceName.className = 'service-name';
+            serviceName.textContent = service.fullName;
+            
+            serviceInfo.appendChild(serviceCode);
+            serviceInfo.appendChild(serviceName);
+
+            // Slider
+            const slider = createSlider(service);
+
+            // Score value
+            const scoreValue = document.createElement('div');
+            scoreValue.className = 'score-value';
+            
+            const scoreSpan = document.createElement('span');
+            scoreSpan.textContent = service.score + '%';
+            scoreValue.appendChild(scoreSpan);
+
+            row.appendChild(serviceInfo);
+            row.appendChild(slider);
+            row.appendChild(scoreValue);
+
+            return row;
+        }
+
+        // Initialize the scorecard
+        function initializeScorecard() {
+            const servicesContainer = document.getElementById('services');
+            
+            serviceData.forEach(service => {
+                const serviceRow = createServiceRow(service);
+                servicesContainer.appendChild(serviceRow);
+            });
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initializeScorecard);
+    </script>
+</body>
+</html>
