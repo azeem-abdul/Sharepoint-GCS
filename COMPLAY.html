@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EBS Process Improvement - SharePoint Component</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- React and ReactDOM -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <!-- Babel Standalone for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    }
+    
+    #root {
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* Custom scrollbar for better UX */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    /* Fix for tab buttons */
+    button {
+      outline: none !important;
+    }
+    
+    button:focus {
+      outline: none !important;
+    }
+    
+    button:active {
+      outline: none !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+    const { Settings, Mail, Phone, ExternalLink, FileText, Map, RefreshCw, BarChart, Clipboard, Shield } = lucide;
+
+    // Process Improvement Data
+    const processImprovementData = [
+      {
+        id: 'fundamentals',
+        title: 'Process Fundamentals',
+        description: 'Fundamental to process improvement and optimisation are process standards and governance to ensure we have the basics in place to be able to perform the work we (EBS) do. The Process Improvement capability team set the standards for process documentation like process maps and standard operating procedures as well as holding the mirror up to each service line to ensure we have good governance and reporting for process foundations.',
+        sections: {
+          'services-offered': {
+            title: 'Services we offer',
+            items: [
+              'Set the Global EBS standard for documenting processes and standard ways of working (SOPs)',
+              'Deliver training to process improvement teams and wider EBS to consistently document and deeply understand processes',
+              'Provide assurance against EBS standards and work with the service lines to develop plans to close gaps'
+            ]
+          },
+          'what-you-get': {
+            title: 'What you get?',
+            items: [
+              'Fit for purpose process maps and SOPs to support continuous improvement and future AI transformation',
+              'Single repository and one version of truth',
+              'Transparency on gaps to standard',
+              'Insights to identify biggest opportunities for improvement'
+            ]
+          },
+          'outcomes': {
+            title: '25/26 Outcomes',
+            description: 'Our aim during 25/26 is for all Service Lines to have the following outcomes in place. The Process Improvement team are in the process of engaging Service Lines leaders to create plans to close any gaps to achieve all outcomes.',
+            items: [
+              'E2E Process Map with L3 maturity data',
+              'Review Cycles Agreed',
+              'E2E Architecture setup in Blueworks and SharePoint/Service Now',
+              'E2E insights being delivered',
+              'All L4 Maps & SOPs stored in EBS repositories, linked to E2E Process Map',
+              'Process documentation assurance and governance'
+            ]
+          },
+          'governance': {
+            title: 'Governance',
+            description: 'Level of compliance to EBS Global Standards across service lines',
+            compliance: [
+              { name: 'PtP', fullName: 'Procure to Pay', percent: 50 },
+              { name: 'OtC', fullName: 'Order to Cash', percent: 50 },
+              { name: 'ED', fullName: 'Electricity Distribution', percent: 25 },
+              { name: 'RTR', fullName: 'Record to Report', percent: 50 },
+              { name: 'PS', fullName: 'People Services', percent: 37.5 },
+              { name: 'ESS', fullName: 'Employee Self Service', percent: 0 },
+              { name: 'L&P', fullName: 'Land and Property', percent: 12.5 },
+              { name: 'ITSD', fullName: 'IT Service Desk', percent: 12.5 }
+            ]
+          },
+          'key-contacts': {
+            title: 'Key Contacts',
+            description: 'Process standards, access to Blueworks, EBS SOP SharePoint and Process Mapping training',
+            contacts: [
+              { name: 'Karen Watkins', role: '', email: 'Karen.Watkins@nationalgrid.com' },
+              { name: 'Dean Clark', role: '', email: 'Dean.Clark@nationalgrid.com' }
+            ],
+            serviceLineContacts: [
+              { 
+                serviceLine: 'RtR', 
+                contacts: [
+                  { name: 'Rebekah Thompson', email: 'Rebekah.Thompson@nationalgrid.com' },
+                  { name: 'Sharon Markham', email: 'Sharon.Markham@nationalgrid.com' }
+                ]
+              },
+              { 
+                serviceLine: 'PtP', 
+                contacts: [
+                  { name: 'Jared Bechard', email: 'Jared.Bechard3@nationalgrid.com' },
+                  { name: 'George Eden', email: 'George.Eden@nationalgrid.com' }
+                ]
+              },
+              { 
+                serviceLine: 'People Support', 
+                contacts: [
+                  { name: 'Jenna Tabolt', email: 'Jenna.Tabolt@nationalgrid.com' }
+                ]
+              },
+              { 
+                serviceLine: 'Other Service Lines', 
+                contacts: [
+                  { name: 'Karen Watkins', email: 'Karen.Watkins@nationalgrid.com' }
+                ]
+              }
+            ]
+          },
+          'tools-templates': {
+            title: 'Supporting Files',
+            resources: [
+              { title: 'Process Standards', url: '/sharepoint/sites/processimprovement/fundamentals/process-standards', description: '' },
+              { title: 'Process Training', url: '/sharepoint/sites/processimprovement/fundamentals/process-training', description: '' },
+              { title: 'SOP Template', url: '/sharepoint/sites/processimprovement/fundamentals/sop-template', description: '' },
+              { title: 'SOP Guidelines', url: '/sharepoint/sites/processimprovement/fundamentals/sop-guidelines', description: '' },
+              { title: 'Blueworks Live', url: 'https://www.ibm.com/products/blueworks-live', description: '' },
+              { title: 'SOP SharePoint', url: '/sharepoint/sites/processimprovement/fundamentals/sop-sharepoint', description: '' },
+              { title: 'SOP ServiceNow', url: '/sharepoint/sites/processimprovement/fundamentals/sop-servicenow', description: '' }
+            ]
+          }
+        }
+      },
+      {
+        id: 'engineering-automation',
+        title: 'Process Engineering & Automation',
+        description: 'Powered by the ESOAR methodology, our Process Engineering and Automation capability streamlines and digitizes our EBS processes to deliver improvements in Efficiency, Effectiveness and Experience (3Es).',
+        sections: {
+          'services-offered': {
+            title: 'Services we offer',
+            items: [
+              'Facilitation of process improvement initiatives using ESOAR methodology and supporting tools/capabilities',
+              'Process Diagnostic, we deep drive into processes to understand current state and offer recommendations for improvement',
+              'Process Improvement delivery where we support the Service Lines to deliver improvements to their Processes',
+              'Problem Solving facilitation, we support service lines to solve process problems driven by data using our A3 problem solving methodology'
+            ]
+          },
+          'what-you-get': {
+            title: 'What you get?',
+            items: [
+              'Improvements in process effectiveness and efficiency',
+              'Data driven insights and actions to eliminate non-value add work',
+              'Delivery of recommendations to standardize and optimize processes',
+              'Automation of process steps and controls'
+            ]
+          },
+          'key-contacts': {
+            title: 'Key Contacts',
+            description: 'Process Engineer Framework, guidance and training;',
+            contacts: [
+              { name: 'Dean Clark', role: '', email: 'Dean.Clark@nationalgrid.com' },
+              { name: 'Azeem Abdul', role: '', email: 'Azeem.Abdul@nationalgrid.com' }
+            ],
+            serviceLineContacts: [
+              {
+                serviceLine: 'RtR', 
+                contacts: [
+                  { name: 'Rebekah Thompson', email: 'Rebekah.Thompson@nationalgrid.com' },
+                  { name: 'Sharon Markham', email: 'Sharon.Markham@nationalgrid.com' }
+                ]
+              },
+              {
+                serviceLine: 'PtP', 
+                contacts: [
+                  { name: 'Jared Bechard', email: 'Jared.Bechard3@nationalgrid.com' },
+                  { name: 'George Eden', email: 'George.Eden@nationalgrid.com' }
+                ]
+              },
+              {
+                serviceLine: 'People Support',
+                contacts: [
+                  { name: 'Jenna Tabolt', email: 'Jenna.Tabolt@nationalgrid.com' }
+                ]
+              },
+              {
+                serviceLine: 'Other Service Lines',
+                contacts: [
+                  { name: 'Elizabeth Smith', email: 'Elizabeth.Smith@nationalgrid.com' }
+                ]
+              }
+            ]
+          },
+          'tools-templates': {
+            title: 'Tools & Templates',
+            resources: [
+              { title: 'Swim Lane Template', url: '/sharepoint/sites/processimprovement/automation/swim-lane-template', description: '' },
+              { title: 'SIPOC Template', url: '/sharepoint/sites/processimprovement/automation/sipoc-template', description: '' },
+              { title: 'Lean Wastes Poster', url: '/sharepoint/sites/processimprovement/automation/lean-wastes-poster', description: '' },
+              { title: 'Waste Capture Form', url: '/sharepoint/sites/processimprovement/automation/waste-capture-form', description: '' },
+              { title: 'Process Training', url: '/sharepoint/sites/processimprovement/automation/process-training', description: '' },
+              { title: 'ESOAR Workbook', url: '/sharepoint/sites/processimprovement/automation/esoar-workbook', description: '' },
+              { title: 'Esoar Examples', url: '/sharepoint/sites/processimprovement/automation/esoar-examples', description: '' },
+              { title: 'Process Data & Performance Capture Sheet', url: '/sharepoint/sites/processimprovement/automation/performance-capture-sheet', description: '' },
+              { title: 'VA, NNVA and NVA Poster', url: '/sharepoint/sites/processimprovement/automation/va-nnva-nva-poster', description: '' },
+              { title: 'A3 Template', url: '/sharepoint/sites/processimprovement/automation/a3-template', description: '' },
+              { title: 'A3 Guide', url: '/sharepoint/sites/processimprovement/automation/a3-guide', description: '' }
+            ]
+          }
+        }
+      }
+    ];
+
+    // Card Component
+    const Card = ({ children, className = '' }) => (
+      <div className={`bg-white rounded-lg shadow ${className}`}>
+        {children}
+      </div>
+    );
+
+    // Badge Component
+    const Badge = ({ children, variant = 'default', className = '' }) => {
+      const variants = {
+        default: 'bg-gray-900 text-white',
+        secondary: 'bg-gray-100 text-gray-900'
+      };
+      
+      return (
+        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${variants[variant]} ${className}`}>
+          {children}
+        </span>
+      );
+    };
+
+    // Division Card Component
+    const DivisionCard = ({ division }) => {
+      const [activeTab, setActiveTab] = useState('services');
+
+      const sections = division.sections;
+      const servicesSection = sections['services-offered'];
+      const whatYouGetSection = sections['what-you-get'];
+      const contactsSection = sections['key-contacts'];
+      const filesSection = sections['tools-templates'];
+      const outcomesSection = sections['outcomes'];
+      const governanceSection = sections['governance'];
+
+      return (
+        <Card className={`p-6 shadow-lg border-2 ${division.id === 'fundamentals' ? 'border-purple-500' : 'border-orange-500'}`}>
+          {/* Sub-Tabs */}
+          <div className="w-full">
+            <div className="grid grid-cols-3 gap-2 mb-6 bg-gray-100 p-1 rounded-lg">
+              <button
+                className={`py-3 px-4 rounded-md font-medium text-sm ${activeTab === 'services' ? 'shadow-md' : ''}`}
+                onClick={() => setActiveTab('services')}
+                style={{ 
+                  minHeight: '48px', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center',
+                  whiteSpace: 'normal',
+                  border: 'none',
+                  outline: 'none',
+                  backgroundColor: activeTab === 'services' ? '#ffffff' : 'transparent',
+                  borderBottom: activeTab === 'services' 
+                    ? `2px solid ${division.id === 'fundamentals' ? '#a855f7' : '#f97316'}`
+                    : 'none',
+                  color: '#111827',
+                  transition: 'all 0.2s'
+                }}
+                onMouseEnter={(e) => {
+                  if (activeTab !== 'services') {
+                    e.currentTarget.style.backgroundColor = '#e5e7eb';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (activeTab !== 'services') {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }
+                }}
+              >
+                Overview & Services
+              </button>
+              <button
+                className={`py-3 px-4 rounded-md font-medium text-sm ${activeTab === 'outcomes' ? 'shadow-md' : ''}`}
+                onClick={() => setActiveTab('outcomes')}
+                style={{ 
+                  minHeight: '48px', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center',
+                  whiteSpace: 'normal',
+                  border: 'none',
+                  outline: 'none',
+                  backgroundColor: activeTab === 'outcomes' ? '#ffffff' : 'transparent',
+                  borderBottom: activeTab === 'outcomes' 
+                    ? `2px solid ${division.id === 'fundamentals' ? '#a855f7' : '#f97316'}`
+                    : 'none',
+                  color: '#111827',
+                  transition: 'all 0.2s'
+                }}
+                onMouseEnter={(e) => {
+                  if (activeTab !== 'outcomes') {
+                    e.currentTarget.style.backgroundColor = '#e5e7eb';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (activeTab !== 'outcomes') {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }
+                }}
+              >
+                {division.id === 'engineering-automation' ? 'Framework' : 'FY26 Outcomes'}
+              </button>
+              <button
+                className={`py-3 px-4 rounded-md font-medium text-sm ${activeTab === 'contacts' ? 'shadow-md' : ''}`}
+                onClick={() => setActiveTab('contacts')}
+                style={{ 
+                  minHeight: '48px', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center',
+                  whiteSpace: 'normal',
+                  border: 'none',
+                  outline: 'none',
+                  backgroundColor: activeTab === 'contacts' ? '#ffffff' : 'transparent',
+                  borderBottom: activeTab === 'contacts' 
+                    ? `2px solid ${division.id === 'fundamentals' ? '#a855f7' : '#f97316'}`
+                    : 'none',
+                  color: '#111827',
+                  transition: 'all 0.2s'
+                }}
+                onMouseEnter={(e) => {
+                  if (activeTab !== 'contacts') {
+                    e.currentTarget.style.backgroundColor = '#e5e7eb';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (activeTab !== 'contacts') {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }
+                }}
+              >
+                Key Contacts and Supporting Files
+              </button>
+            </div>
+
+            {/* Overview & Services Tab */}
+            {activeTab === 'services' && (
+              <div className="space-y-6">
+                {/* Overview */}
+                <div className={`p-4 ${division.id === 'fundamentals' ? 'bg-purple-50 border-purple-100' : 'bg-orange-50 border-orange-100'} rounded-lg border`}>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Overview</h3>
+                  <p className="text-sm text-gray-700 leading-relaxed">{division.description}</p>
+                </div>
+
+                {/* Services & What You Get - Side by Side */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Services We Offer */}
+                  {servicesSection && (
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-3">{servicesSection.title}</h3>
+                      <div className="space-y-2">
+                        {servicesSection.items?.map((item, index) => (
+                          <div key={index} className="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                            <div className={`w-1.5 h-1.5 ${division.id === 'fundamentals' ? 'bg-purple-500' : 'bg-orange-500'} rounded-full mt-2 flex-shrink-0`}></div>
+                            <p className="text-sm text-gray-700">{item}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* What You Get */}
+                  {whatYouGetSection && (
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-3">{whatYouGetSection.title}</h3>
+                      <div className="space-y-2">
+                        {whatYouGetSection.items?.map((item, index) => (
+                          <div key={index} className="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                            <div className={`w-1.5 h-1.5 ${division.id === 'fundamentals' ? 'bg-purple-600' : 'bg-orange-600'} rounded-full mt-2 flex-shrink-0`}></div>
+                            <p className="text-sm text-gray-700">{item}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* FY26 Outcomes / Framework Tab */}
+            {activeTab === 'outcomes' && (
+              <div className="space-y-6">
+                {division.id === 'engineering-automation' ? (
+                  /* ESOAR Framework */
+                  <div className="space-y-6">
+                    {/* Header */}
+                    <div className="p-4 bg-orange-50 rounded-lg border-2 border-orange-300">
+                      <p className="text-sm text-gray-800 leading-relaxed">
+                        In EBS we optimise our processes using the ESOAR methodology. It's the heartbeat to our process improvement activities. ESOAR is a structured framework made up of five key elements: Eliminate, Standardise, Optimise, Automate and Robotise. Using the elements individually or as a combination and help us significantly improve operational efficiency, reduce costs, and enhance overall performance. The systematic approach of ESOAR ensures continuous improvement and adaptation to meet the EBS "Outcomes".
+                      </p>
+                    </div>
+
+                    {/* ESOAR Framework Grid */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                      {/* Left Side - ESOAR Elements */}
+                      <div className="space-y-4">
+                        {/* Eliminate */}
+                        <div className="flex items-start space-x-4">
+                          <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span className="text-white font-bold text-xl">E</span>
+                          </div>
+                          <div className="flex-1 p-3 bg-white rounded-lg border border-gray-200">
+                            <p className="text-sm text-gray-800">
+                              <span className="font-medium">Eliminate</span> - This step focuses on identifying and removing activities that do not add value to the business. It could involve eliminating redundant tasks, outdated procedures, or inefficient processes which leads to removing unnecessary and wasteful processes to streamline operations.
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Standardise */}
+                        <div className="flex items-start space-x-4">
+                          <div className="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span className="text-white font-bold text-xl">S</span>
+                          </div>
+                          <div className="flex-1 p-3 bg-white rounded-lg border border-gray-200">
+                            <p className="text-sm text-gray-800">
+                              <span className="font-medium">Standardise</span> - Standardisation involves developing standard templates, procedures, and guidelines for common tasks or best practices in maintaining consistency and ensuring that everyone follows best practice. Once standardised, these tasks become the foundation for future improvements.
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Optimise */}
+                        <div className="flex items-start space-x-4">
+                          <div className="w-12 h-12 bg-green-400 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span className="text-white font-bold text-xl">O</span>
+                          </div>
+                          <div className="flex-1 p-3 bg-white rounded-lg border border-gray-200">
+                            <p className="text-sm text-gray-800">
+                              <span className="font-medium">Optimise</span> - The goal is to maximise the potential of current processes by identifying and implementing improvements. This phase aims to fine-tune workflows, utilise resources better, and eliminate inefficiencies. Many optimisation techniques can be used and leveraged in this step such as continuous improvement, benchmarking, and technology.
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Automate */}
+                        <div className="flex items-start space-x-4">
+                          <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span className="text-white font-bold text-xl">A</span>
+                          </div>
+                          <div className="flex-1 p-3 bg-white rounded-lg border border-gray-200">
+                            <p className="text-sm text-gray-800">
+                              <span className="font-medium">Automate</span> - Use technology to automate repetitive and manual tasks This involves leveraging the existing systems and tools to automate manual processes. For instance, using workflows in SAP to automate tasks like invoice processing, approval workflows, and data entry.
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Robotise */}
+                        <div className="flex items-start space-x-4">
+                          <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span className="text-white font-bold text-xl">R</span>
+                          </div>
+                          <div className="flex-1 p-3 bg-white rounded-lg border border-gray-200">
+                            <p className="text-sm text-gray-800">
+                              <span className="font-medium">Robotise</span> - Apply advanced robotic technologies to further automate complex processes. This involves using software robots or "bots" to mimic human actions and handle high-volume, repetitive tasks across multiple systems.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Right Side - 9 Steps */}
+                      <div className="space-y-3">
+                        <div className="p-4 bg-blue-900 rounded-lg">
+                          <p className="text-white font-medium text-sm">Step 1: Map Current Processes</p>
+                        </div>
+                        <div className="p-4 bg-blue-900 rounded-lg">
+                          <p className="text-white font-medium text-sm">Step 2: Collect Performance Data</p>
+                        </div>
+                        <div className="p-4 bg-green-500 rounded-lg">
+                          <p className="text-white font-medium text-sm">Step 3: Identify VA, NNVA, and NVA Activities</p>
+                        </div>
+                        <div className="p-4 bg-green-500 rounded-lg">
+                          <p className="text-white font-medium text-sm">Step 4: Identify Waste in Processes</p>
+                        </div>
+                        <div className="p-4 bg-orange-300 rounded-lg">
+                          <p className="text-white font-medium text-sm">Step 5: Eliminate Non-Value-Adding Activities</p>
+                        </div>
+                        <div className="p-4 bg-pink-600 rounded-lg">
+                          <p className="text-white font-medium text-sm">Step 6: Standardise VA and NNVA Activities</p>
+                        </div>
+                        <div className="p-4 bg-green-400 rounded-lg">
+                          <p className="text-white font-medium text-sm">Step 7: Optimise VA and NNVA Activities</p>
+                        </div>
+                        <div className="p-4 bg-red-500 rounded-lg">
+                          <p className="text-white font-medium text-sm">Step 8: Automate Repetitive Tasks</p>
+                        </div>
+                        <div className="p-4 bg-blue-500 rounded-lg">
+                          <p className="text-white font-medium text-sm">Step 9: Robotise Complex Processes</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  /* FY26 Outcomes for Process Fundamentals */
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* Left Side - Outcomes Timeline */}
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-semibold text-gray-900">25/26 Outcomes Timeline</h3>
+                      <p className="text-sm text-gray-600 mb-6">
+                        {outcomesSection?.description}
+                      </p>
+
+                      {/* Timeline Items */}
+                      <div className="relative space-y-4">
+                        {/* Vertical Line */}
+                        <div className="absolute left-8 top-12 bottom-12 w-0.5 bg-gray-200"></div>
+
+                        {/* Outcome 1 */}
+                        <div className="flex items-start space-x-4 relative">
+                          <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 z-10">
+                            <i data-lucide="map" className="text-white w-7 h-7"></i>
+                          </div>
+                          <div className="flex-1 p-4 bg-white rounded-lg border border-gray-200 mt-2">
+                            <p className="text-xs text-gray-500 mb-1">Outcome 1</p>
+                            <p className="text-sm text-gray-900 font-medium">E2E Process Map with L3 maturity data</p>
+                          </div>
+                        </div>
+
+                        {/* Outcome 2 */}
+                        <div className="flex items-start space-x-4 relative">
+                          <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 z-10">
+                            <i data-lucide="refresh-cw" className="text-white w-7 h-7"></i>
+                          </div>
+                          <div className="flex-1 p-4 bg-white rounded-lg border border-gray-200 mt-2">
+                            <p className="text-xs text-gray-500 mb-1">Outcome 2</p>
+                            <p className="text-sm text-gray-900 font-medium">Review Cycles Agreed</p>
+                          </div>
+                        </div>
+
+                        {/* Outcome 3 */}
+                        <div className="flex items-start space-x-4 relative">
+                          <div className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0 z-10">
+                            <i data-lucide="settings" className="text-white w-7 h-7"></i>
+                          </div>
+                          <div className="flex-1 p-4 bg-white rounded-lg border border-gray-200 mt-2">
+                            <p className="text-xs text-gray-500 mb-1">Outcome 3</p>
+                            <p className="text-sm text-gray-900 font-medium">E2E Architecture setup in Blueworks and SharePoint/Service Now</p>
+                          </div>
+                        </div>
+
+                        {/* Outcome 4 */}
+                        <div className="flex items-start space-x-4 relative">
+                          <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0 z-10">
+                            <i data-lucide="bar-chart" className="text-white w-7 h-7"></i>
+                          </div>
+                          <div className="flex-1 p-4 bg-white rounded-lg border border-gray-200 mt-2">
+                            <p className="text-xs text-gray-500 mb-1">Outcome 4</p>
+                            <p className="text-sm text-gray-900 font-medium">E2E insights being delivered</p>
+                          </div>
+                        </div>
+
+                        {/* Outcome 5 */}
+                        <div className="flex items-start space-x-4 relative">
+                          <div className="w-16 h-16 bg-teal-500 rounded-full flex items-center justify-center flex-shrink-0 z-10">
+                            <i data-lucide="clipboard" className="text-white w-7 h-7"></i>
+                          </div>
+                          <div className="flex-1 p-4 bg-white rounded-lg border border-gray-200 mt-2">
+                            <p className="text-xs text-gray-500 mb-1">Outcome 5</p>
+                            <p className="text-sm text-gray-900 font-medium">All L4 Maps & SOPs stored in EBS repositories, linked to E2E Process Map</p>
+                          </div>
+                        </div>
+
+                        {/* Outcome 6 */}
+                        <div className="flex items-start space-x-4 relative">
+                          <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 z-10">
+                            <i data-lucide="shield" className="text-white w-7 h-7"></i>
+                          </div>
+                          <div className="flex-1 p-4 bg-white rounded-lg border border-gray-200 mt-2">
+                            <p className="text-xs text-gray-500 mb-1">Outcome 6</p>
+                            <p className="text-sm text-gray-900 font-medium">Process documentation assurance and governance</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Side - Governance Chart */}
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-semibold text-gray-900">Governance</h3>
+                      
+                      <div className="p-6 bg-white rounded-lg border border-gray-200">
+                        <h4 className="font-semibold text-gray-900 mb-2">Process Fundamentals</h4>
+                        <p className="text-sm text-gray-500 mb-6">Level of compliance to EBS Global Standards</p>
+
+                        <div className="space-y-6">
+                          {(() => {
+                            const serviceLines = [
+                              { code: 'PtP', name: 'Procure to Pay', percentage: 50, filled: 4 },
+                              { code: 'OtC', name: 'Order to Cash', percentage: 50, filled: 4 },
+                              { code: 'ED', name: 'Electricity Distribution', percentage: 25, filled: 2 },
+                              { code: 'RTR', name: 'Record to Report', percentage: 50, filled: 4 },
+                              { code: 'PS', name: 'People Services', percentage: 37.5, filled: 3 },
+                              { code: 'ESS', name: 'Employee Self Service', percentage: 0, filled: 0 },
+                              { code: 'L&P', name: 'Land and Property', percentage: 12.5, filled: 1 },
+                              { code: 'ITSD', name: 'IT Service Desk', percentage: 12.5, filled: 1 }
+                            ];
+
+                            const colors = [
+                              'bg-red-600', 'bg-red-600', 'bg-orange-500', 'bg-orange-400',
+                              'bg-yellow-300', 'bg-yellow-200', 'bg-green-200', 'bg-green-300'
+                            ];
+                            const emptyColors = [
+                              'bg-red-100', 'bg-red-100', 'bg-orange-100', 'bg-orange-50',
+                              'bg-yellow-50', 'bg-yellow-50', 'bg-green-50', 'bg-green-100'
+                            ];
+
+                            return serviceLines.map((line, idx) => (
+                              React.createElement('div', { key: idx },
+                                React.createElement('div', { className: 'flex justify-between items-center mb-2' },
+                                  React.createElement('div', null,
+                                    React.createElement('p', { className: 'text-sm font-medium text-gray-900' }, line.code),
+                                    React.createElement('p', { className: 'text-xs text-gray-500' }, line.name)
+                                  ),
+                                  React.createElement('span', { className: 'text-sm font-medium text-gray-900' }, `${line.percentage}%`)
+                                ),
+                                React.createElement('div', { className: 'flex gap-1' },
+                                  Array.from({ length: 8 }).map((_, i) => 
+                                    React.createElement('div', { 
+                                      key: i,
+                                      className: `h-3 rounded ${i < line.filled ? colors[i] : emptyColors[i]}`,
+                                      style: { flex: 1 }
+                                    })
+                                  )
+                                )
+                              )
+                            ));
+                          })()}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Key Contacts & Supporting Files Tab */}
+            {activeTab === 'contacts' && (
+              <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 lg:gap-0">
+                {/* Left Side - Key Contacts */}
+                <div className="space-y-4 lg:pr-8">
+                  <h3 className="text-lg font-semibold text-gray-900">Key Contacts</h3>
+                  
+                  {contactsSection && (
+                    <div className="space-y-4">
+                      {/* Description */}
+                      {contactsSection.description && (
+                        <p className="text-sm text-gray-600">{contactsSection.description}</p>
+                      )}
+
+                      {/* Main Contacts */}
+                      {contactsSection.contacts && contactsSection.contacts.length > 0 && (
+                        <div className="grid grid-cols-2 gap-3">
+                          {contactsSection.contacts.map((contact, index) => (
+                            <div key={index} className="p-4 bg-white rounded-lg border border-gray-200">
+                              <div className="flex flex-col items-center text-center space-y-2">
+                                {contact.email && (
+                                  <div className={`w-12 h-12 rounded-full ${division.id === 'fundamentals' ? 'bg-purple-100' : 'bg-orange-100'} flex items-center justify-center flex-shrink-0`}>
+                                    <i data-lucide="user" className={`${division.id === 'fundamentals' ? 'text-purple-600' : 'text-orange-600'} w-6 h-6`}></i>
+                                  </div>
+                                )}
+                                <div className="w-full">
+                                  <p className="text-sm font-medium text-gray-900">{contact.name}</p>
+                                  {contact.email && (
+                                    <a href={`mailto:${contact.email}`} className="text-xs text-blue-600 hover:underline block truncate">
+                                      {contact.email}
+                                    </a>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Service Line Key Contacts */}
+                      {contactsSection.serviceLineContacts && contactsSection.serviceLineContacts.length > 0 && (
+                        <div className="mt-6">
+                          <h4 className="text-sm font-semibold text-gray-900 mb-3">Service Line Key Contacts</h4>
+                          <div className="grid grid-cols-2 gap-4">
+                            {contactsSection.serviceLineContacts.map((slContact, index) => (
+                              <div key={index} className="space-y-2">
+                                <p className="text-xs text-gray-500 uppercase tracking-wide">{slContact.serviceLine}</p>
+                                <div className="space-y-2">
+                                  {slContact.contacts.map((contact, idx) => (
+                                    <div key={idx} className="p-3 bg-white rounded-lg border border-gray-200">
+                                      <div className="flex items-start space-x-3">
+                                        {contact.imageUrl ? (
+                                          <img src={contact.imageUrl} alt={contact.name} className="w-8 h-8 rounded-full object-cover flex-shrink-0" />
+                                        ) : (
+                                          <div className={`w-8 h-8 rounded-full ${division.id === 'fundamentals' ? 'bg-purple-100' : 'bg-orange-100'} flex items-center justify-center flex-shrink-0`}>
+                                            <i data-lucide="user" className={`${division.id === 'fundamentals' ? 'text-purple-600' : 'text-orange-600'} w-4 h-4`}></i>
+                                          </div>
+                                        )}
+                                        <div className="flex-1 min-w-0">
+                                          <p className="text-sm text-gray-900">{contact.name}</p>
+                                          <a href={`mailto:${contact.email}`} className="text-xs text-blue-600 hover:underline truncate block">
+                                            {contact.email}
+                                          </a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* Divider */}
+                <div className="hidden lg:block relative">
+                  <div className={`absolute top-0 bottom-0 left-0 w-px ${division.id === 'fundamentals' ? 'bg-gradient-to-b from-transparent via-purple-300 to-transparent' : 'bg-gradient-to-b from-transparent via-orange-300 to-transparent'}`}></div>
+                </div>
+
+                {/* Right Side - Supporting Files */}
+                <div className="space-y-4 lg:pl-8">
+                  <h3 className="text-lg font-semibold text-gray-900">Supporting Files</h3>
+                  
+                  {filesSection && filesSection.resources && filesSection.resources.length > 0 && (
+                    <div className="space-y-3">
+                      {filesSection.resources.map((resource, index) => {
+                        const isSoftware = ['Blueworks Live', 'SOP SharePoint', 'SOP ServiceNow'].includes(resource.title);
+                        return (
+                          <a
+                            key={index}
+                            href={resource.url}
+                            className="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all"
+                          >
+                            <div className="flex items-start space-x-3">
+                              <i data-lucide="file-text" className={`${division.id === 'fundamentals' ? 'text-purple-500' : 'text-orange-500'} w-5 h-5 flex-shrink-0`}></i>
+                              <div className="flex-1">
+                                <p className="text-sm font-medium text-gray-900">{resource.title}</p>
+                                {resource.description && (
+                                  <p className="text-xs text-gray-500 mt-1">{resource.description}</p>
+                                )}
+                              </div>
+                              <i data-lucide={isSoftware ? 'monitor' : 'external-link'} className="text-gray-400 w-4 h-4"></i>
+                            </div>
+                          </a>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        </Card>
+      );
+    };
+
+    // Main App Component
+    const App = () => {
+      const [activeMainTab, setActiveMainTab] = useState('fundamentals');
+
+      React.useEffect(() => {
+        lucide.createIcons();
+      });
+
+      // Re-initialize icons when tabs change
+      React.useEffect(() => {
+        setTimeout(() => {
+          lucide.createIcons();
+        }, 50);
+      }, [activeMainTab]);
+
+      return (
+        <div className="min-h-screen w-full bg-white p-4 md:p-8">
+          <div className="mb-8">
+            <h1 className="text-2xl md:text-3xl font-semibold text-blue-900 mb-2">Process Improvement Capability</h1>
+            <p className="text-sm md:text-base text-gray-600 leading-relaxed">
+              The Process Improvement teams ensure EBS has the necessary standards, capabilities & governance to enable the service lines to streamline and digitize their processes, delivering the most impactful improvements in process effectiveness, efficiency and end user experience. Our Process Improvement framework is split into Process Fundamentals and Process Engineering & Automation. Using our Performance Excellence and Automation Capabilities we ensure we are offering the most value to the Service Lines. Explore the Process Improvement Capability in more detail below.
+            </p>
+          </div>
+          
+          {/* Top Level Division Tabs */}
+          <div className="w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              <button
+                className={`p-4 md:p-6 rounded-lg border-2 transition-all bg-white text-gray-900 ${
+                  activeMainTab === 'fundamentals'
+                    ? 'border-purple-500 shadow-lg'
+                    : 'border-gray-200 hover:border-purple-300'
+                }`}
+                onClick={() => setActiveMainTab('fundamentals')}
+              >
+                <div className="text-center">
+                  <div className="font-semibold text-base md:text-lg">Process Fundamentals</div>
+                  <div className="text-xs md:text-sm opacity-80 mt-1">What we ensure</div>
+                </div>
+              </button>
+              <button
+                className={`p-4 md:p-6 rounded-lg border-2 transition-all bg-white text-gray-900 ${
+                  activeMainTab === 'engineering-automation'
+                    ? 'border-orange-500 shadow-lg'
+                    : 'border-gray-200 hover:border-orange-300'
+                }`}
+                onClick={() => setActiveMainTab('engineering-automation')}
+              >
+                <div className="text-center">
+                  <div className="font-semibold text-base md:text-lg">Process Engineering & Automation</div>
+                  <div className="text-xs md:text-sm opacity-80 mt-1">How we streamline and digitise</div>
+                </div>
+              </button>
+            </div>
+
+            {/* Tab Content */}
+            <div>
+              {activeMainTab === 'fundamentals' && (
+                <DivisionCard division={processImprovementData[0]} />
+              )}
+              {activeMainTab === 'engineering-automation' && (
+                <DivisionCard division={processImprovementData[1]} />
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // Render the app
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+    
+    // Initialize Lucide icons after render
+    setTimeout(() => {
+      lucide.createIcons();
+    }, 100);
+  </script>
+</body>
+</html>
