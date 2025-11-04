@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EBS Process Improvement - SharePoint Component</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    }
+    
+    /* Hide all content initially */
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .main-tab, .sub-tab {
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    /* Icon styles - simple SVG replacements */
+    .icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      vertical-align: middle;
+    }
+    
+    .icon-user {
+      background: currentColor;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'%3E%3C/path%3E%3C/svg%3E") center/contain no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'%3E%3C/path%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    
+    .icon-file {
+      background: currentColor;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'%3E%3C/path%3E%3C/svg%3E") center/contain no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'%3E%3C/path%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    
+    .icon-external {
+      background: currentColor;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'%3E%3C/path%3E%3C/svg%3E") center/contain no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'%3E%3C/path%3E%3C/svg%3E") center/contain no-repeat;
+    }
+  </style>
+</head>
+<body class="bg-white">
+  <div class="min-h-screen w-full p-4 md:p-8">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-2xl md:text-3xl font-semibold text-blue-900 mb-2">Process Improvement Capability</h1>
+      <p class="text-sm md:text-base text-gray-600 leading-relaxed">
+        The Process Improvement teams ensure EBS has the necessary standards, capabilities & governance to enable the service lines to streamline and digitize their processes, delivering the most impactful improvements in process effectiveness, efficiency and end user experience. Our Process Improvement framework is split into Process Fundamentals and Process Engineering & Automation. Using our Performance Excellence and Automation Capabilities we ensure we are offering the most value to the Service Lines. Explore the Process Improvement Capability in more detail below.
+      </p>
+    </div>
+    
+    <!-- Main Division Tabs -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <button 
+        id="tab-fundamentals"
+        class="main-tab p-4 md:p-6 rounded-lg border-2 transition-all bg-white text-gray-900 border-purple-500 shadow-lg"
+        onclick="switchMainTab('fundamentals')"
+      >
+        <div class="text-center">
+          <div class="font-semibold text-base md:text-lg">Process Fundamentals</div>
+          <div class="text-xs md:text-sm opacity-80 mt-1">What we ensure</div>
+        </div>
+      </button>
+      <button 
+        id="tab-engineering"
+        class="main-tab p-4 md:p-6 rounded-lg border-2 transition-all bg-white text-gray-900 border-gray-200 hover:border-orange-300"
+        onclick="switchMainTab('engineering')"
+      >
+        <div class="text-center">
+          <div class="font-semibold text-base md:text-lg">Process Engineering & Automation</div>
+          <div class="text-xs md:text-sm opacity-80 mt-1">How we streamline and digitise</div>
+        </div>
+      </button>
+    </div>
+    
+    <!-- Process Fundamentals Content -->
+    <div id="content-fundamentals" class="tab-content active">
+      <div class="p-6 shadow-lg border-2 border-purple-500 rounded-lg bg-white">
+        <!-- Sub Tabs -->
+        <div class="grid grid-cols-3 gap-2 mb-6 bg-gray-100 p-1 rounded-lg">
+          <button 
+            id="fundamentals-services"
+            class="sub-tab py-3 px-4 rounded-md font-medium text-sm shadow-md bg-white border-b-2 border-purple-500"
+            onclick="switchSubTab('fundamentals', 'services')"
+            style="color: #111827"
+          >
+            Overview & Services
+          </button>
+          <button 
+            id="fundamentals-outcomes"
+            class="sub-tab py-3 px-4 rounded-md font-medium text-sm bg-transparent hover:bg-gray-200"
+            onclick="switchSubTab('fundamentals', 'outcomes')"
+            style="color: #111827"
+          >
+            FY26 Outcomes
+          </button>
+          <button 
+            id="fundamentals-contacts"
+            class="sub-tab py-3 px-4 rounded-md font-medium text-sm bg-transparent hover:bg-gray-200"
+            onclick="switchSubTab('fundamentals', 'contacts')"
+            style="color: #111827"
+          >
+            Key Contacts and Supporting Files
+          </button>
+        </div>
+        
+        <!-- Fundamentals: Overview & Services -->
+        <div id="fundamentals-services-content" class="tab-content active space-y-6">
+          <!-- Overview -->
+          <div class="p-4 bg-purple-50 border-purple-100 rounded-lg border">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Overview</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              Fundamental to process improvement and optimisation are process standards and governance to ensure we have the basics in place to be able to perform the work we (EBS) do. The Process Improvement capability team set the standards for process documentation like process maps and standard operating procedures as well as holding the mirror up to each service line to ensure we have good governance and reporting for process foundations.
+            </p>
+          </div>
+          
+          <!-- Services & What You Get -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">Services we offer</h3>
+              <div class="space-y-2">
+                <div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <div class="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <p class="text-sm text-gray-700">Set the Global EBS standard for documenting processes and standard ways of working (SOPs)</p>
+                </div>
+                <div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <div class="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <p class="text-sm text-gray-700">Deliver training to process improvement teams and wider EBS to consistently document and deeply understand processes</p>
+                </div>
+                <div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <div class="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <p class="text-sm text-gray-700">Provide assurance against EBS standards and work with the service lines to develop plans to close gaps</p>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">What you get?</h3>
+              <div class="space-y-2">
+                <div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <div class="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <p class="text-sm text-gray-700">Fit for purpose process maps and SOPs to support continuous improvement and future AI transformation</p>
+                </div>
+                <div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <div class="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <p class="text-sm text-gray-700">Single repository and one version of truth</p>
+                </div>
+                <div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <div class="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <p class="text-sm text-gray-700">Transparency on gaps to standard</p>
+                </div>
+                <div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <div class="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <p class="text-sm text-gray-700">Insights to identify biggest opportunities for improvement</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Fundamentals: FY26 Outcomes -->
+        <div id="fundamentals-outcomes-content" class="tab-content">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Left: Outcomes Timeline -->
+            <div class="space-y-4">
+              <h3 class="text-lg font-semibold text-gray-900">25/26 Outcomes Timeline</h3>
+              <p class="text-sm text-gray-600 mb-6">
+                Our aim during 25/26 is for all Service Lines to have the following outcomes in place. The Process Improvement team are in the process of engaging Service Lines leaders to create plans to close any gaps to achieve all outcomes.
+              </p>
+              
+              <div class="relative space-y-4">
+                <!-- Vertical Line -->
+                <div class="absolute left-8 top-12 bottom-12 w-0.5 bg-gray-200"></div>
+                
+                <!-- Outcome 1 -->
+                <div class="flex items-start space-x-4 relative">
+                  <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 z-10 text-white text-2xl font-bold">📍</div>
+                  <div class="flex-1 p-4 bg-white rounded-lg border border-gray-200 mt-2">
+                    <p class="text-xs text-gray-500 mb-1">Outcome 1</p>
+                    <p class="text-sm text-gray-900">E2E Process Map with L3 maturity data</p>
+                  </div>
+                </div>
+                
+                <!-- Outcome 2 -->
+                <div class="flex items-start space-x-4 relative">
+                  <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 z-10 text-white text-2xl font-bold">🔄</div>
+                  <div class="flex-1 p-4 bg-white rounded-lg border border-gray-200 mt-2">
+                    <p class="text-xs text-gray-500 mb-1">Outcome 2</p>
+                    <p class="text-sm text-gray-900">Review Cycles Agreed</p>
+                  </div>
+                </div>
+                
+                <!-- Outcome 3 -->
+                <div class="flex items-start space-x-4 relative">
+                  <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0 z-10 text-white text-2xl font-bold">⚙️</div>
+                  <div class="flex-1 p-4 bg-white rounded-lg border border-gray-200 mt-2">
+                    <p class="text-xs text-gray-500 mb-1">Outcome 3</p>
+                    <p class="text-sm text-gray-900">E2E Architecture setup in Blueworks and SharePoint/Service Now</p>
+                  </div>
+                </div>
+                
+                <!-- Outcome 4 -->
+                <div class="flex items-start space-x-4 relative">
+                  <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0 z-10 text-white text-2xl font-bold">📊</div>
+                  <div class="flex-1 p-4 bg-white rounded-lg border border-gray-200 mt-2">
+                    <p class="text-xs text-gray-500 mb-1">Outcome 4</p>
+                    <p class="text-sm text-gray-900">E2E insights being delivered</p>
+                  </div>
+                </div>
+                
+                <!-- Outcome 5 -->
+                <div class="flex items-start space-x-4 relative">
+                  <div class="w-16 h-16 bg-teal-500 rounded-full flex items-center justify-center flex-shrink-0 z-10 text-white text-2xl font-bold">📋</div>
+                  <div class="flex-1 p-4 bg-white rounded-lg border border-gray-200 mt-2">
+                    <p class="text-xs text-gray-500 mb-1">Outcome 5</p>
+                    <p class="text-sm text-gray-900">All L4 Maps & SOPs stored in EBS repositories, linked to E2E Process Map</p>
+                  </div>
+                </div>
+                
+                <!-- Outcome 6 -->
+                <div class="flex items-start space-x-4 relative">
+                  <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 z-10 text-white text-2xl font-bold">🛡️</div>
+                  <div class="flex-1 p-4 bg-white rounded-lg border border-gray-200 mt-2">
+                    <p class="text-xs text-gray-500 mb-1">Outcome 6</p>
+                    <p class="text-sm text-gray-900">Process documentation assurance and governance</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right: Governance Chart -->
+            <div class="space-y-4">
+              <h3 class="text-lg font-semibold text-gray-900">Governance</h3>
+              <div class="p-6 bg-white rounded-lg border border-gray-200">
+                <h4 class="text-base font-semibold text-gray-900 mb-2">Process Fundamentals</h4>
+                <p class="text-sm text-gray-500 mb-6">Level of compliance to EBS Global Standards</p>
+                
+                <div class="space-y-6">
+                  <!-- PtP -->
+                  <div>
+                    <div class="flex justify-between items-center mb-2">
+                      <div>
+                        <p class="text-sm font-medium text-gray-900">PtP</p>
+                        <p class="text-xs text-gray-500">Procure to Pay</p>
+                      </div>
+                      <span class="text-sm font-medium text-gray-900">50%</span>
+                    </div>
+                    <div class="flex gap-1">
+                      <div class="h-3 rounded bg-red-600" style="flex:1"></div>
+                      <div class="h-3 rounded bg-red-600" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-500" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-400" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-100" style="flex:1"></div>
+                    </div>
+                  </div>
+                  
+                  <!-- OtC -->
+                  <div>
+                    <div class="flex justify-between items-center mb-2">
+                      <div>
+                        <p class="text-sm font-medium text-gray-900">OtC</p>
+                        <p class="text-xs text-gray-500">Order to Cash</p>
+                      </div>
+                      <span class="text-sm font-medium text-gray-900">50%</span>
+                    </div>
+                    <div class="flex gap-1">
+                      <div class="h-3 rounded bg-red-600" style="flex:1"></div>
+                      <div class="h-3 rounded bg-red-600" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-500" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-400" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-100" style="flex:1"></div>
+                    </div>
+                  </div>
+                  
+                  <!-- ED -->
+                  <div>
+                    <div class="flex justify-between items-center mb-2">
+                      <div>
+                        <p class="text-sm font-medium text-gray-900">ED</p>
+                        <p class="text-xs text-gray-500">Electricity Distribution</p>
+                      </div>
+                      <span class="text-sm font-medium text-gray-900">25%</span>
+                    </div>
+                    <div class="flex gap-1">
+                      <div class="h-3 rounded bg-red-600" style="flex:1"></div>
+                      <div class="h-3 rounded bg-red-600" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-100" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-100" style="flex:1"></div>
+                    </div>
+                  </div>
+                  
+                  <!-- RTR -->
+                  <div>
+                    <div class="flex justify-between items-center mb-2">
+                      <div>
+                        <p class="text-sm font-medium text-gray-900">RTR</p>
+                        <p class="text-xs text-gray-500">Record to Report</p>
+                      </div>
+                      <span class="text-sm font-medium text-gray-900">50%</span>
+                    </div>
+                    <div class="flex gap-1">
+                      <div class="h-3 rounded bg-red-600" style="flex:1"></div>
+                      <div class="h-3 rounded bg-red-600" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-500" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-400" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-100" style="flex:1"></div>
+                    </div>
+                  </div>
+                  
+                  <!-- PS -->
+                  <div>
+                    <div class="flex justify-between items-center mb-2">
+                      <div>
+                        <p class="text-sm font-medium text-gray-900">PS</p>
+                        <p class="text-xs text-gray-500">People Services</p>
+                      </div>
+                      <span class="text-sm font-medium text-gray-900">37.5%</span>
+                    </div>
+                    <div class="flex gap-1">
+                      <div class="h-3 rounded bg-red-600" style="flex:1"></div>
+                      <div class="h-3 rounded bg-red-600" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-500" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-100" style="flex:1"></div>
+                    </div>
+                  </div>
+                  
+                  <!-- ESS -->
+                  <div>
+                    <div class="flex justify-between items-center mb-2">
+                      <div>
+                        <p class="text-sm font-medium text-gray-900">ESS</p>
+                        <p class="text-xs text-gray-500">Employee Self Service</p>
+                      </div>
+                      <span class="text-sm font-medium text-gray-900">0%</span>
+                    </div>
+                    <div class="flex gap-1">
+                      <div class="h-3 rounded bg-red-100" style="flex:1"></div>
+                      <div class="h-3 rounded bg-red-100" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-100" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-100" style="flex:1"></div>
+                    </div>
+                  </div>
+                  
+                  <!-- L&P -->
+                  <div>
+                    <div class="flex justify-between items-center mb-2">
+                      <div>
+                        <p class="text-sm font-medium text-gray-900">L&P</p>
+                        <p class="text-xs text-gray-500">Land and Property</p>
+                      </div>
+                      <span class="text-sm font-medium text-gray-900">12.5%</span>
+                    </div>
+                    <div class="flex gap-1">
+                      <div class="h-3 rounded bg-red-600" style="flex:1"></div>
+                      <div class="h-3 rounded bg-red-100" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-100" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-100" style="flex:1"></div>
+                    </div>
+                  </div>
+                  
+                  <!-- ITSD -->
+                  <div>
+                    <div class="flex justify-between items-center mb-2">
+                      <div>
+                        <p class="text-sm font-medium text-gray-900">ITSD</p>
+                        <p class="text-xs text-gray-500">IT Service Desk</p>
+                      </div>
+                      <span class="text-sm font-medium text-gray-900">12.5%</span>
+                    </div>
+                    <div class="flex gap-1">
+                      <div class="h-3 rounded bg-red-600" style="flex:1"></div>
+                      <div class="h-3 rounded bg-red-100" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-100" style="flex:1"></div>
+                      <div class="h-3 rounded bg-orange-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-yellow-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-50" style="flex:1"></div>
+                      <div class="h-3 rounded bg-green-100" style="flex:1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Fundamentals: Contacts -->
+        <div id="fundamentals-contacts-content" class="tab-content">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Left: Key Contacts -->
+            <div class="space-y-4">
+              <h3 class="text-lg font-semibold text-gray-900">Key Contacts</h3>
+              <p class="text-sm text-gray-600">Process standards, access to Blueworks, EBS SOP SharePoint and Process Mapping training</p>
+              
+              <!-- Main Contacts -->
+              <div class="grid grid-cols-2 gap-3">
+                <div class="p-4 bg-white rounded-lg border border-gray-200">
+                  <div class="flex flex-col items-center text-center space-y-2">
+                    <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 text-purple-600 text-2xl">👤</div>
+                    <div class="w-full">
+                      <p class="text-sm font-medium text-gray-900">Karen Watkins</p>
+                      <a href="mailto:Karen.Watkins@nationalgrid.com" class="text-xs text-blue-600 hover:underline block truncate">Karen.Watkins@nationalgrid.com</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-4 bg-white rounded-lg border border-gray-200">
+                  <div class="flex flex-col items-center text-center space-y-2">
+                    <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 text-purple-600 text-2xl">👤</div>
+                    <div class="w-full">
+                      <p class="text-sm font-medium text-gray-900">Dean Clark</p>
+                      <a href="mailto:Dean.Clark@nationalgrid.com" class="text-xs text-blue-600 hover:underline block truncate">Dean.Clark@nationalgrid.com</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Service Line Contacts -->
+              <div class="mt-6">
+                <h4 class="text-sm font-semibold text-gray-900 mb-3">Service Line Key Contacts</h4>
+                <div class="grid grid-cols-2 gap-4">
+                  <!-- RtR -->
+                  <div class="space-y-2">
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-medium">RtR</p>
+                    <div class="space-y-2">
+                      <div class="p-3 bg-white rounded-lg border border-gray-200">
+                        <div class="flex items-start space-x-3">
+                          <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 text-purple-600">👤</div>
+                          <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900">Rebekah Thompson</p>
+                            <a href="mailto:Rebekah.Thompson@nationalgrid.com" class="text-xs text-blue-600 hover:underline truncate block">Rebekah.Thompson@nationalgrid.com</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="p-3 bg-white rounded-lg border border-gray-200">
+                        <div class="flex items-start space-x-3">
+                          <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 text-purple-600">👤</div>
+                          <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900">Sharon Markham</p>
+                            <a href="mailto:Sharon.Markham@nationalgrid.com" class="text-xs text-blue-600 hover:underline truncate block">Sharon.Markham@nationalgrid.com</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- PtP -->
+                  <div class="space-y-2">
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-medium">PtP</p>
+                    <div class="space-y-2">
+                      <div class="p-3 bg-white rounded-lg border border-gray-200">
+                        <div class="flex items-start space-x-3">
+                          <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 text-purple-600">👤</div>
+                          <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900">Jared Bechard</p>
+                            <a href="mailto:Jared.Bechard3@nationalgrid.com" class="text-xs text-blue-600 hover:underline truncate block">Jared.Bechard3@nationalgrid.com</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="p-3 bg-white rounded-lg border border-gray-200">
+                        <div class="flex items-start space-x-3">
+                          <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 text-purple-600">👤</div>
+                          <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900">George Eden</p>
+                            <a href="mailto:George.Eden@nationalgrid.com" class="text-xs text-blue-600 hover:underline truncate block">George.Eden@nationalgrid.com</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- People Support -->
+                  <div class="space-y-2">
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-medium">People Support</p>
+                    <div class="space-y-2">
+                      <div class="p-3 bg-white rounded-lg border border-gray-200">
+                        <div class="flex items-start space-x-3">
+                          <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 text-purple-600">👤</div>
+                          <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900">Jenna Tabolt</p>
+                            <a href="mailto:Jenna.Tabolt@nationalgrid.com" class="text-xs text-blue-600 hover:underline truncate block">Jenna.Tabolt@nationalgrid.com</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Other Service Lines -->
+                  <div class="space-y-2">
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-medium">Other Service Lines</p>
+                    <div class="space-y-2">
+                      <div class="p-3 bg-white rounded-lg border border-gray-200">
+                        <div class="flex items-start space-x-3">
+                          <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 text-purple-600">👤</div>
+                          <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900">Karen Watkins</p>
+                            <a href="mailto:Karen.Watkins@nationalgrid.com" class="text-xs text-blue-600 hover:underline truncate block">Karen.Watkins@nationalgrid.com</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right: Supporting Files -->
+            <div class="space-y-4">
+              <h3 class="text-lg font-semibold text-gray-900">Supporting Files</h3>
+              <div class="space-y-3">
+                <a href="/sharepoint/sites/processimprovement/fundamentals/process-standards" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-purple-500 text-xl">📄</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">Process Standards</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="/sharepoint/sites/processimprovement/fundamentals/process-training" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-purple-500 text-xl">📄</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">Process Training</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="/sharepoint/sites/processimprovement/fundamentals/sop-template" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-purple-500 text-xl">📄</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">SOP Template</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="/sharepoint/sites/processimprovement/fundamentals/sop-guidelines" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-purple-500 text-xl">📄</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">SOP Guidelines</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="https://www.ibm.com/products/blueworks-live" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-purple-500 text-xl">🖥️</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">Blueworks Live</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="/sharepoint/sites/processimprovement/fundamentals/sop-sharepoint" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-purple-500 text-xl">🖥️</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">SOP SharePoint</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="/sharepoint/sites/processimprovement/fundamentals/sop-servicenow" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-purple-500 text-xl">🖥️</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">SOP ServiceNow</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Process Engineering & Automation Content -->
+    <div id="content-engineering" class="tab-content">
+      <div class="p-6 shadow-lg border-2 border-orange-500 rounded-lg bg-white">
+        <!-- Sub Tabs -->
+        <div class="grid grid-cols-3 gap-2 mb-6 bg-gray-100 p-1 rounded-lg">
+          <button 
+            id="engineering-services"
+            class="sub-tab py-3 px-4 rounded-md font-medium text-sm shadow-md bg-white border-b-2 border-orange-500"
+            onclick="switchSubTab('engineering', 'services')"
+            style="color: #111827"
+          >
+            Overview & Services
+          </button>
+          <button 
+            id="engineering-framework"
+            class="sub-tab py-3 px-4 rounded-md font-medium text-sm bg-transparent hover:bg-gray-200"
+            onclick="switchSubTab('engineering', 'framework')"
+            style="color: #111827"
+          >
+            Framework
+          </button>
+          <button 
+            id="engineering-contacts"
+            class="sub-tab py-3 px-4 rounded-md font-medium text-sm bg-transparent hover:bg-gray-200"
+            onclick="switchSubTab('engineering', 'contacts')"
+            style="color: #111827"
+          >
+            Key Contacts and Supporting Files
+          </button>
+        </div>
+        
+        <!-- Engineering: Overview & Services -->
+        <div id="engineering-services-content" class="tab-content active space-y-6">
+          <!-- Overview -->
+          <div class="p-4 bg-orange-50 border-orange-100 rounded-lg border">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Overview</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              Powered by the ESOAR methodology, our Process Engineering and Automation capability streamlines and digitizes our EBS processes to deliver improvements in Efficiency, Effectiveness and Experience (3Es).
+            </p>
+          </div>
+          
+          <!-- Services & What You Get -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">Services we offer</h3>
+              <div class="space-y-2">
+                <div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <p class="text-sm text-gray-700">Facilitation of process improvement initiatives using ESOAR methodology and supporting tools/capabilities</p>
+                </div>
+                <div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <p class="text-sm text-gray-700">Process Diagnostic, we deep drive into processes to understand current state and offer recommendations for improvement</p>
+                </div>
+                <div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <p class="text-sm text-gray-700">Process Improvement delivery where we support the Service Lines to deliver improvements to their Processes</p>
+                </div>
+                <div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                  <p class="text-sm text-gray-700">Problem Solving facilitation, we support service lines to solve process problems driven by data using our A3 problem solving methodology</p>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">What you get?</h3>
+              <div class="space-y-2">
+                <div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <div class="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <p class="text-sm text-gray-700">Improvements in process effectiveness and efficiency</p>
+                </div>
+                <div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <div class="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <p class="text-sm text-gray-700">Data driven insights and actions to eliminate non-value add work</p>
+                </div>
+                <div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <div class="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <p class="text-sm text-gray-700">Delivery of recommendations to standardize and optimize processes</p>
+                </div>
+                <div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                  <div class="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <p class="text-sm text-gray-700">Automation of process steps and controls</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Engineering: Framework (ESOAR) -->
+        <div id="engineering-framework-content" class="tab-content space-y-6">
+          <!-- Header -->
+          <div class="p-4 bg-orange-50 rounded-lg border-2 border-orange-300">
+            <p class="text-sm text-gray-800 leading-relaxed">
+              In EBS we optimise our processes using the ESOAR methodology. It's the heartbeat to our process improvement activities. ESOAR is a structured framework made up of five key elements: Eliminate, Standardise, Optimise, Automate and Robotise. Using the elements individually or as a combination and help us significantly improve operational efficiency, reduce costs, and enhance overall performance. The systematic approach of ESOAR ensures continuous improvement and adaptation to meet the EBS "Outcomes".
+            </p>
+          </div>
+          
+          <!-- ESOAR Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Left: ESOAR Elements -->
+            <div class="space-y-4">
+              <!-- Eliminate -->
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span class="text-white font-bold text-xl">E</span>
+                </div>
+                <div class="flex-1 p-3 bg-white rounded-lg border border-gray-200">
+                  <p class="text-sm text-gray-800">
+                    <span class="font-medium">Eliminate</span> - This step focuses on identifying and removing activities that do not add value to the business. It could involve eliminating redundant tasks, outdated procedures, or inefficient processes which leads to removing unnecessary and wasteful processes to streamline operations.
+                  </p>
+                </div>
+              </div>
+              
+              <!-- Standardise -->
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span class="text-white font-bold text-xl">S</span>
+                </div>
+                <div class="flex-1 p-3 bg-white rounded-lg border border-gray-200">
+                  <p class="text-sm text-gray-800">
+                    <span class="font-medium">Standardise</span> - Standardisation involves developing standard templates, procedures, and guidelines for common tasks or best practices in maintaining consistency and ensuring that everyone follows best practice. Once standardised, these tasks become the foundation for future improvements.
+                  </p>
+                </div>
+              </div>
+              
+              <!-- Optimise -->
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-green-400 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span class="text-white font-bold text-xl">O</span>
+                </div>
+                <div class="flex-1 p-3 bg-white rounded-lg border border-gray-200">
+                  <p class="text-sm text-gray-800">
+                    <span class="font-medium">Optimise</span> - The goal is to maximise the potential of current processes by identifying and implementing improvements. This phase aims to fine-tune workflows, utilise resources better, and eliminate inefficiencies. Many optimisation techniques can be used and leveraged in this step such as continuous improvement, benchmarking, and technology.
+                  </p>
+                </div>
+              </div>
+              
+              <!-- Automate -->
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span class="text-white font-bold text-xl">A</span>
+                </div>
+                <div class="flex-1 p-3 bg-white rounded-lg border border-gray-200">
+                  <p class="text-sm text-gray-800">
+                    <span class="font-medium">Automate</span> - Use technology to automate repetitive and manual tasks This involves leveraging the existing systems and tools to automate manual processes. For instance, using workflows in SAP to automate tasks like invoice processing, approval workflows, and data entry.
+                  </p>
+                </div>
+              </div>
+              
+              <!-- Robotise -->
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span class="text-white font-bold text-xl">R</span>
+                </div>
+                <div class="flex-1 p-3 bg-white rounded-lg border border-gray-200">
+                  <p class="text-sm text-gray-800">
+                    <span class="font-medium">Robotise</span> - Apply advanced robotic technologies to further automate complex processes. This involves using software robots or "bots" to mimic human actions and handle high-volume, repetitive tasks across multiple systems.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right: 9 Steps -->
+            <div class="space-y-3">
+              <div class="p-4 bg-blue-900 rounded-lg">
+                <p class="text-white font-medium text-sm">Step 1: Map Current Processes</p>
+              </div>
+              <div class="p-4 bg-blue-900 rounded-lg">
+                <p class="text-white font-medium text-sm">Step 2: Collect Performance Data</p>
+              </div>
+              <div class="p-4 bg-green-500 rounded-lg">
+                <p class="text-white font-medium text-sm">Step 3: Identify VA, NNVA, and NVA Activities</p>
+              </div>
+              <div class="p-4 bg-green-500 rounded-lg">
+                <p class="text-white font-medium text-sm">Step 4: Identify Waste in Processes</p>
+              </div>
+              <div class="p-4 bg-orange-300 rounded-lg">
+                <p class="text-white font-medium text-sm">Step 5: Eliminate Non-Value-Adding Activities</p>
+              </div>
+              <div class="p-4 bg-pink-600 rounded-lg">
+                <p class="text-white font-medium text-sm">Step 6: Standardise VA and NNVA Activities</p>
+              </div>
+              <div class="p-4 bg-green-400 rounded-lg">
+                <p class="text-white font-medium text-sm">Step 7: Optimise VA and NNVA Activities</p>
+              </div>
+              <div class="p-4 bg-red-500 rounded-lg">
+                <p class="text-white font-medium text-sm">Step 8: Automate Repetitive Tasks</p>
+              </div>
+              <div class="p-4 bg-blue-500 rounded-lg">
+                <p class="text-white font-medium text-sm">Step 9: Robotise Complex Processes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Engineering: Contacts -->
+        <div id="engineering-contacts-content" class="tab-content">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Left: Key Contacts -->
+            <div class="space-y-4">
+              <h3 class="text-lg font-semibold text-gray-900">Key Contacts</h3>
+              <p class="text-sm text-gray-600">Process Engineer Framework, guidance and training;</p>
+              
+              <!-- Main Contacts -->
+              <div class="grid grid-cols-2 gap-3">
+                <div class="p-4 bg-white rounded-lg border border-gray-200">
+                  <div class="flex flex-col items-center text-center space-y-2">
+                    <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 text-orange-600 text-2xl">👤</div>
+                    <div class="w-full">
+                      <p class="text-sm font-medium text-gray-900">Dean Clark</p>
+                      <a href="mailto:Dean.Clark@nationalgrid.com" class="text-xs text-blue-600 hover:underline block truncate">Dean.Clark@nationalgrid.com</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-4 bg-white rounded-lg border border-gray-200">
+                  <div class="flex flex-col items-center text-center space-y-2">
+                    <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 text-orange-600 text-2xl">👤</div>
+                    <div class="w-full">
+                      <p class="text-sm font-medium text-gray-900">Azeem Abdul</p>
+                      <a href="mailto:Azeem.Abdul@nationalgrid.com" class="text-xs text-blue-600 hover:underline block truncate">Azeem.Abdul@nationalgrid.com</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Service Line Contacts -->
+              <div class="mt-6">
+                <h4 class="text-sm font-semibold text-gray-900 mb-3">Service Line Key Contacts</h4>
+                <div class="grid grid-cols-2 gap-4">
+                  <!-- RtR -->
+                  <div class="space-y-2">
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-medium">RtR</p>
+                    <div class="space-y-2">
+                      <div class="p-3 bg-white rounded-lg border border-gray-200">
+                        <div class="flex items-start space-x-3">
+                          <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 text-orange-600">👤</div>
+                          <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900">Rebekah Thompson</p>
+                            <a href="mailto:Rebekah.Thompson@nationalgrid.com" class="text-xs text-blue-600 hover:underline truncate block">Rebekah.Thompson@nationalgrid.com</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="p-3 bg-white rounded-lg border border-gray-200">
+                        <div class="flex items-start space-x-3">
+                          <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 text-orange-600">👤</div>
+                          <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900">Sharon Markham</p>
+                            <a href="mailto:Sharon.Markham@nationalgrid.com" class="text-xs text-blue-600 hover:underline truncate block">Sharon.Markham@nationalgrid.com</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- PtP -->
+                  <div class="space-y-2">
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-medium">PtP</p>
+                    <div class="space-y-2">
+                      <div class="p-3 bg-white rounded-lg border border-gray-200">
+                        <div class="flex items-start space-x-3">
+                          <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 text-orange-600">👤</div>
+                          <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900">Jared Bechard</p>
+                            <a href="mailto:Jared.Bechard3@nationalgrid.com" class="text-xs text-blue-600 hover:underline truncate block">Jared.Bechard3@nationalgrid.com</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="p-3 bg-white rounded-lg border border-gray-200">
+                        <div class="flex items-start space-x-3">
+                          <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 text-orange-600">👤</div>
+                          <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900">George Eden</p>
+                            <a href="mailto:George.Eden@nationalgrid.com" class="text-xs text-blue-600 hover:underline truncate block">George.Eden@nationalgrid.com</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- People Support -->
+                  <div class="space-y-2">
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-medium">People Support</p>
+                    <div class="space-y-2">
+                      <div class="p-3 bg-white rounded-lg border border-gray-200">
+                        <div class="flex items-start space-x-3">
+                          <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 text-orange-600">👤</div>
+                          <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900">Jenna Tabolt</p>
+                            <a href="mailto:Jenna.Tabolt@nationalgrid.com" class="text-xs text-blue-600 hover:underline truncate block">Jenna.Tabolt@nationalgrid.com</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Other Service Lines -->
+                  <div class="space-y-2">
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-medium">Other Service Lines</p>
+                    <div class="space-y-2">
+                      <div class="p-3 bg-white rounded-lg border border-gray-200">
+                        <div class="flex items-start space-x-3">
+                          <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 text-orange-600">👤</div>
+                          <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900">Elizabeth Smith</p>
+                            <a href="mailto:Elizabeth.Smith@nationalgrid.com" class="text-xs text-blue-600 hover:underline truncate block">Elizabeth.Smith@nationalgrid.com</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right: Supporting Files -->
+            <div class="space-y-4">
+              <h3 class="text-lg font-semibold text-gray-900">Supporting Files</h3>
+              <div class="space-y-3">
+                <a href="/sharepoint/sites/processimprovement/automation/swim-lane-template" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-orange-500 text-xl">📄</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">Swim Lane Template</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="/sharepoint/sites/processimprovement/automation/sipoc-template" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-orange-500 text-xl">📄</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">SIPOC Template</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="/sharepoint/sites/processimprovement/automation/lean-wastes-poster" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-orange-500 text-xl">📄</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">Lean Wastes Poster</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="/sharepoint/sites/processimprovement/automation/waste-capture-form" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-orange-500 text-xl">📄</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">Waste Capture Form</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="/sharepoint/sites/processimprovement/automation/process-training" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-orange-500 text-xl">📄</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">Process Training</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="/sharepoint/sites/processimprovement/automation/esoar-workbook" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-orange-500 text-xl">📄</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">ESOAR Workbook</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="/sharepoint/sites/processimprovement/automation/esoar-examples" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-orange-500 text-xl">📄</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">Esoar Examples</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="/sharepoint/sites/processimprovement/automation/performance-capture-sheet" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-orange-500 text-xl">📄</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">Process Data & Performance Capture Sheet</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="/sharepoint/sites/processimprovement/automation/va-nnva-nva-poster" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-orange-500 text-xl">📄</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">VA, NNVA and NVA Poster</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="/sharepoint/sites/processimprovement/automation/a3-template" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-orange-500 text-xl">📄</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">A3 Template</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+                <a href="/sharepoint/sites/processimprovement/automation/a3-guide" class="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all">
+                  <div class="flex items-start space-x-3">
+                    <span class="text-orange-500 text-xl">📄</span>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900">A3 Guide</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">→</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Switch main tabs
+    function switchMainTab(tab) {
+      // Update tab buttons
+      document.querySelectorAll('.main-tab').forEach(btn => {
+        btn.classList.remove('border-purple-500', 'border-orange-500', 'shadow-lg');
+        btn.classList.add('border-gray-200');
+      });
+      
+      // Update content visibility
+      document.querySelectorAll('#content-fundamentals, #content-engineering').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      if (tab === 'fundamentals') {
+        document.getElementById('tab-fundamentals').classList.remove('border-gray-200');
+        document.getElementById('tab-fundamentals').classList.add('border-purple-500', 'shadow-lg');
+        document.getElementById('content-fundamentals').classList.add('active');
+      } else {
+        document.getElementById('tab-engineering').classList.remove('border-gray-200');
+        document.getElementById('tab-engineering').classList.add('border-orange-500', 'shadow-lg');
+        document.getElementById('content-engineering').classList.add('active');
+      }
+    }
+    
+    // Switch sub tabs
+    function switchSubTab(division, subtab) {
+      const color = division === 'fundamentals' ? 'purple' : 'orange';
+      
+      // Update sub-tab buttons
+      document.querySelectorAll(`#${division}-services, #${division}-outcomes, #${division}-framework, #${division}-contacts`).forEach(btn => {
+        btn.classList.remove('shadow-md', 'bg-white', 'border-b-2', 'border-purple-500', 'border-orange-500');
+        btn.classList.add('bg-transparent', 'hover:bg-gray-200');
+      });
+      
+      // Update content visibility
+      document.querySelectorAll(`#${division}-services-content, #${division}-outcomes-content, #${division}-framework-content, #${division}-contacts-content`).forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // Activate selected tab
+      const selectedBtn = document.getElementById(`${division}-${subtab}`);
+      selectedBtn.classList.remove('bg-transparent', 'hover:bg-gray-200');
+      selectedBtn.classList.add('shadow-md', 'bg-white', 'border-b-2', `border-${color}-500`);
+      document.getElementById(`${division}-${subtab}-content`).classList.add('active');
+    }
+  </script>
+</body>
+</html>
