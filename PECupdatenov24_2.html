@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EBS Process Improvement</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,"Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    .tab-content,.subtab-content,.expandable-content{display:none}
+    .tab-content.active,.subtab-content.active{display:block}
+    .expandable-content.expanded{display:block}
+  </style>
+</head>
+<body class="bg-white min-h-screen p-8">
+  <div class="w-full">
+    <!-- Top Tabs -->
+    <div class="mb-8 space-y-4">
+      <div class="grid w-full grid-cols-1 gap-4">
+        <button class="top-tab py-4 border-2 border-blue-900 bg-white rounded-lg" data-tab="capability" onclick="switchTopTab('capability')">
+          <div class="text-center"><div class="font-medium text-gray-900">Process Improvement Capability</div><div class="text-xs opacity-80 mt-1 text-gray-600">Standards, capabilities & governance</div></div>
+        </button>
+      </div>
+      <div class="grid w-full grid-cols-3 gap-4">
+        <button class="top-tab py-4 border-2 border-gray-200 bg-white rounded-lg hover:border-purple-500 transition-colors" data-tab="fundamentals" onclick="switchTopTab('fundamentals')">
+          <div class="text-center"><div class="font-medium text-gray-900">Process Fundamentals</div><div class="text-xs opacity-80 mt-1 text-gray-600">What we ensure</div></div>
+        </button>
+        <button class="top-tab py-4 border-2 border-gray-200 bg-white rounded-lg hover:border-orange-500 transition-colors" data-tab="engineering-automation" onclick="switchTopTab('engineering-automation')">
+          <div class="text-center"><div class="font-medium text-gray-900">Process Engineering & Automation</div><div class="text-xs opacity-80 mt-1 text-gray-600">How we streamline and digitise</div></div>
+        </button>
+        <button class="top-tab py-4 border-2 border-gray-200 bg-white rounded-lg hover:border-teal-500 transition-colors" data-tab="performance-evolution" onclick="switchTopTab('performance-evolution')">
+          <div class="text-center"><div class="font-medium text-gray-900">Performance Evolution</div><div class="text-xs opacity-80 mt-1 text-gray-600">How we measure and grow</div></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- CAPABILITY CONTENT -->
+    <div id="capability-content" class="tab-content active">
+      <div class="p-6 shadow-lg border-2 border-blue-900 rounded-xl bg-white">
+        <div class="grid w-full grid-cols-3 mb-6 bg-gray-100 p-1 rounded-full">
+          <button class="capability-subtab rounded-full px-6 py-2 bg-white shadow-sm border-2 border-blue-900" data-subtab="overview" onclick="switchSubTab('capability','overview')">Overview</button>
+          <button class="capability-subtab rounded-full px-6 py-2" data-subtab="maturity" onclick="switchSubTab('capability','maturity')">Maturity Model</button>
+          <button class="capability-subtab rounded-full px-6 py-2" data-subtab="capability-details" onclick="switchSubTab('capability','capability-details')">Capability</button>
+        </div>
+        <div id="capability-overview" class="subtab-content active">
+          <div class="p-4 bg-blue-50 rounded-lg border-2 border-blue-300">
+            <h3 class="text-gray-900 mb-2 text-lg font-medium">Process Improvement Capability Overview</h3>
+            <p class="text-sm text-gray-800 leading-relaxed">The Process Improvement teams ensure EBS has the necessary standards, capabilities & governance to enable the service lines to streamline and digitize their processes, delivering the most impactful improvements in process effectiveness, efficiency and end user experience. Our Process Improvement framework is split into Process Fundamentals and Process Engineering & Automation. Using our Performance Excellence and Automation Capabilities we ensure we are offering the most value to the Service Lines.</p>
+          </div>
+        </div>
+        <div id="capability-maturity" class="subtab-content">
+          <div class="space-y-6">
+            <div class="p-4 bg-blue-50 rounded-lg border-2 border-blue-300">
+              <h3 class="text-gray-900 mb-2 text-lg font-medium">Maturity Model</h3>
+              <p class="text-sm text-gray-800 leading-relaxed">Our maturity model framework helps assess and improve process capabilities across four progressive levels.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="p-6 bg-white rounded-xl border-2 border-blue-200 shadow-sm">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                    <span class="text-blue-900 font-bold">2</span>
+                  </div>
+                  <h4 class="text-gray-900 font-medium">Level 2</h4>
+                </div>
+                <p class="text-sm text-gray-900 font-medium mb-3">Foundations in place, delivering tactical improvements in 3Es</p>
+                <ul class="space-y-2 text-sm text-gray-600">
+                  <li class="flex items-start gap-2">
+                    <span class="text-blue-600 mt-0.5">•</span>
+                    <span>ESOAR methodology adopted to drive local improvements</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-blue-600 mt-0.5">•</span>
+                    <span>Processes and ways of working documented to EBS standards</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-blue-600 mt-0.5">•</span>
+                    <span>Process owners own and maintain their documentation through regular reviews</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="p-6 bg-white rounded-xl border-2 border-blue-200 shadow-sm">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-12 h-12 rounded-full bg-blue-200 flex items-center justify-center">
+                    <span class="text-blue-900 font-bold">3</span>
+                  </div>
+                  <h4 class="text-gray-900 font-medium">Level 3</h4>
+                </div>
+                <p class="text-sm text-gray-900 font-medium mb-3">Data-led improvements delivering quantified benefits in 3Es</p>
+                <ul class="space-y-2 text-sm text-gray-600">
+                  <li class="flex items-start gap-2">
+                    <span class="text-blue-600 mt-0.5">•</span>
+                    <span>Global standardisation has started using external benchmarks to ID opportunities</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-blue-600 mt-0.5">•</span>
+                    <span>Improvement opportunities are quantified and tracked to delivery</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-blue-600 mt-0.5">•</span>
+                    <span>Process owners demonstrate shift to E2E thinking for prioritisation of initiatives. ESOAR embedded</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="p-6 bg-white rounded-xl border-2 border-blue-200 shadow-sm">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-12 h-12 rounded-full bg-blue-400 flex items-center justify-center">
+                    <span class="text-white font-bold">4</span>
+                  </div>
+                  <h4 class="text-gray-900 font-medium">Level 4</h4>
+                </div>
+                <p class="text-sm text-gray-900 font-medium mb-3">E-2-E redesign delivering step changes in performance, real-time insight</p>
+                <ul class="space-y-2 text-sm text-gray-600">
+                  <li class="flex items-start gap-2">
+                    <span class="text-blue-600 mt-0.5">•</span>
+                    <span>E2E processes are being streamlined in collaboration with functions</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-blue-600 mt-0.5">•</span>
+                    <span>Full BPM ecosystem enables data driven insights, process modelling and real time monitoring of performance</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-blue-600 mt-0.5">•</span>
+                    <span>Culture of relentless customer value pursuit across the 3Es</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="p-6 bg-white rounded-xl border-2 border-blue-200 shadow-sm">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center">
+                    <span class="text-white font-bold">5</span>
+                  </div>
+                  <h4 class="text-gray-900 font-medium">Level 5</h4>
+                </div>
+                <p class="text-sm text-gray-900 font-medium mb-3">Delivering enterprise solution, recognised by business as CoE for value realisation</p>
+                <ul class="space-y-2 text-sm text-gray-600">
+                  <li class="flex items-start gap-2">
+                    <span class="text-blue-600 mt-0.5">•</span>
+                    <span>On-demand solutions delivered to NG BUs and Functions</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-blue-600 mt-0.5">•</span>
+                    <span>Fully integrated ways of working with Automation CoE</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-blue-600 mt-0.5">•</span>
+                    <span>EBS Process culture seen by BUs and Functions as value differentiator</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="capability-capability-details" class="subtab-content">
+          <div class="space-y-6">
+            <div class="p-4 bg-blue-50 rounded-lg border-2 border-blue-300">
+              <h3 class="text-gray-900 mb-2 text-lg font-medium">Process Improvement Roles & Capabilities</h3>
+              <p class="text-sm text-gray-800 leading-relaxed">Our team consists of specialized roles, each bringing unique expertise to drive process excellence across EBS.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- The Manager -->
+              <div class="p-5 bg-white rounded-xl border-2 border-blue-200 shadow-sm cursor-pointer" onclick="toggleRole('manager')">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0">👤</div>
+                  <div class="flex-1"><h4 class="text-gray-900 font-medium">The Manager</h4><p class="text-xs text-gray-500">Strategic Leadership & Oversight</p></div>
+                  <button class="text-blue-600"><span class="toggle-icon-manager">▼</span></button>
+                </div>
+                <div id="manager-details" class="expandable-content">
+                  <div class="mt-4 pt-4 border-t border-blue-200">
+                    <p class="text-xs uppercase tracking-wider text-blue-700 mb-3 font-medium">Qualifications & Certifications</p>
+                    <div class="space-y-4">
+                      <!-- UK Certifications -->
+                      <div>
+                        <p class="text-xs font-medium text-gray-500 uppercase mb-3">UK</p>
+                        
+                        <!-- Lean Six Sigma -->
+                        <div class="mb-4 p-3 bg-blue-50 rounded-lg">
+                          <p class="text-sm font-medium text-gray-900 mb-2">British Quality Foundation (BQF)</p>
+                          <ul class="space-y-1 text-xs text-gray-700">
+                            <li class="flex items-start gap-2">
+                              <span class="text-blue-600 mt-0.5">•</span>
+                              <span>Offers rigorous certification pathways from Yellow Belt to Master Black Belt</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span class="text-blue-600 mt-0.5">•</span>
+                              <span>Known for setting UK standards in Lean Six Sigma</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span class="text-blue-600 mt-0.5">•</span>
+                              <span>Ideal for professionals seeking formal recognition and credibility</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span class="text-blue-600 mt-0.5">•</span>
+                              <span><a href="https://www.bqf.org.uk" class="text-blue-600 underline hover:text-blue-800">BQF Certification Info</a></span>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <!-- Change Management -->
+                        <div class="space-y-3">
+                          <div class="p-3 bg-blue-50 rounded-lg">
+                            <p class="text-sm font-medium text-gray-900 mb-2">Prosci Certified Change Practitioner</p>
+                            <ul class="space-y-1 text-xs text-gray-700">
+                              <li class="flex items-start gap-2">
+                                <span class="text-blue-600 mt-0.5">•</span>
+                                <span>Based on the ADKAR model</span>
+                              </li>
+                              <li class="flex items-start gap-2">
+                                <span class="text-blue-600 mt-0.5">•</span>
+                                <span>Globally recognized</span>
+                              </li>
+                              <li class="flex items-start gap-2">
+                                <span class="text-blue-600 mt-0.5">•</span>
+                                <span>Duration: 3 days (intensive)</span>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="p-3 bg-blue-50 rounded-lg">
+                            <p class="text-sm font-medium text-gray-900 mb-2">ChangeQuest Foundation & Practitioner</p>
+                            <ul class="space-y-1 text-xs text-gray-700">
+                              <li class="flex items-start gap-2">
+                                <span class="text-blue-600 mt-0.5">•</span>
+                                <span>APMG-accredited</span>
+                              </li>
+                              <li class="flex items-start gap-2">
+                                <span class="text-blue-600 mt-0.5">•</span>
+                                <span>Focus on people and process aspects</span>
+                              </li>
+                              <li class="flex items-start gap-2">
+                                <span class="text-blue-600 mt-0.5">•</span>
+                                <span>Duration: 5 days</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- US Certifications -->
+                      <div>
+                        <p class="text-xs font-medium text-gray-500 uppercase mb-3">US</p>
+                        
+                        <!-- Lean Six Sigma -->
+                        <div class="mb-4 p-3 bg-blue-50 rounded-lg">
+                          <p class="text-sm font-medium text-gray-900 mb-2">American Society for Quality (ASQ)</p>
+                          <ul class="space-y-1 text-xs text-gray-700">
+                            <li class="flex items-start gap-2">
+                              <span class="text-blue-600 mt-0.5">•</span>
+                              <span>Considered the gold standard in Six Sigma certification</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span class="text-blue-600 mt-0.5">•</span>
+                              <span>Offers certifications from Yellow Belt to Master Black Belt</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span class="text-blue-600 mt-0.5">•</span>
+                              <span>Highly respected by Fortune 500 companies</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span class="text-blue-600 mt-0.5">•</span>
+                              <span><a href="https://asq.org/cert" class="text-blue-600 underline hover:text-blue-800">ASQ Certification Info</a></span>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <!-- Change Management -->
+                        <div class="space-y-3">
+                          <div class="p-3 bg-blue-50 rounded-lg">
+                            <p class="text-sm font-medium text-gray-900 mb-2">Certified Change Management Professional (CCMP)</p>
+                            <ul class="space-y-1 text-xs text-gray-700">
+                              <li class="flex items-start gap-2">
+                                <span class="text-blue-600 mt-0.5">•</span>
+                                <span>Offered by ACMP (Association of Change Management Professionals)</span>
+                              </li>
+                              <li class="flex items-start gap-2">
+                                <span class="text-blue-600 mt-0.5">•</span>
+                                <span>Globally respected</span>
+                              </li>
+                              <li class="flex items-start gap-2">
+                                <span class="text-blue-600 mt-0.5">•</span>
+                                <span>Duration: Varies (training optional)</span>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="p-3 bg-blue-50 rounded-lg">
+                            <p class="text-sm font-medium text-gray-900 mb-2">Cornell University Change Management Certificate</p>
+                            <ul class="space-y-1 text-xs text-gray-700">
+                              <li class="flex items-start gap-2">
+                                <span class="text-blue-600 mt-0.5">•</span>
+                                <span>Strategic leadership focus</span>
+                              </li>
+                              <li class="flex items-start gap-2">
+                                <span class="text-blue-600 mt-0.5">•</span>
+                                <span>Ivy League credibility</span>
+                              </li>
+                              <li class="flex items-start gap-2">
+                                <span class="text-blue-600 mt-0.5">•</span>
+                                <span>Duration: ~3 months (online)</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- The Practitioner -->
+              <div class="p-5 bg-white rounded-xl border-2 border-blue-200 shadow-sm cursor-pointer" onclick="toggleRole('practitioner')">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center flex-shrink-0">📊</div>
+                  <div class="flex-1"><h4 class="text-gray-900 font-medium">The Practitioner</h4><p class="text-xs text-gray-500">Analysis & Optimization</p></div>
+                  <button class="text-blue-600"><span class="toggle-icon-practitioner">▼</span></button>
+                </div>
+                <div id="practitioner-details" class="expandable-content">
+                  <div class="mt-4 pt-4 border-t border-blue-200">
+                    <p class="text-xs uppercase tracking-wider text-blue-700 mb-3 font-medium">Qualifications & Certifications</p>
+                    <div class="space-y-4">
+                      <!-- UK Certifications -->
+                      <div>
+                        <p class="text-xs font-medium text-gray-500 uppercase mb-3">UK</p>
+                        
+                        <!-- Lean Six Sigma -->
+                        <div class="mb-4 p-3 bg-purple-50 rounded-lg">
+                          <p class="text-sm font-medium text-gray-900 mb-2">British Quality Foundation (BQF)</p>
+                          <ul class="space-y-1 text-xs text-gray-700">
+                            <li class="flex items-start gap-2">
+                              <span class="text-purple-600 mt-0.5">•</span>
+                              <span>Offers rigorous certification pathways from Yellow Belt to Master Black Belt</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span class="text-purple-600 mt-0.5">•</span>
+                              <span>Known for setting UK standards in Lean Six Sigma</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span class="text-purple-600 mt-0.5">•</span>
+                              <span>Ideal for professionals seeking formal recognition and credibility</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span class="text-purple-600 mt-0.5">•</span>
+                              <span><a href="https://www.bqf.org.uk" class="text-blue-600 underline hover:text-blue-800">BQF Certification Info</a></span>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <!-- Value & Benefits Management -->
+                        <div class="p-3 bg-purple-50 rounded-lg">
+                          <p class="text-sm font-medium text-gray-900 mb-2">International Institute of Business Analysis - Certified Business Analysis Professional (CBAP)</p>
+                          <ul class="space-y-1 text-xs text-gray-700">
+                            <li class="flex items-start gap-2">
+                              <span class="text-purple-600 mt-0.5">•</span>
+                              <span>3-year Certification</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span class="text-purple-600 mt-0.5">•</span>
+                              <span>Duration: Self-Paced w/ Exam</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <!-- US Certifications -->
+                      <div>
+                        <p class="text-xs font-medium text-gray-500 uppercase mb-3">US</p>
+                        
+                        <!-- Lean Six Sigma -->
+                        <div class="mb-4 p-3 bg-purple-50 rounded-lg">
+                          <p class="text-sm font-medium text-gray-900 mb-2">American Society for Quality (ASQ)</p>
+                          <ul class="space-y-1 text-xs text-gray-700">
+                            <li class="flex items-start gap-2">
+                              <span class="text-purple-600 mt-0.5">•</span>
+                              <span>Considered the gold standard in Six Sigma certification</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span class="text-purple-600 mt-0.5">•</span>
+                              <span>Offers certifications from Yellow Belt to Master Black Belt</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span class="text-purple-600 mt-0.5">•</span>
+                              <span>Highly respected by Fortune 500 companies</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span class="text-purple-600 mt-0.5">•</span>
+                              <span><a href="https://asq.org/cert" class="text-blue-600 underline hover:text-blue-800">ASQ Certification Info</a></span>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <!-- Value & Benefits Management -->
+                        <div class="p-3 bg-purple-50 rounded-lg">
+                          <p class="text-sm font-medium text-gray-900 mb-2">International Institute of Business Analysis - Certified Business Analysis Professional (CBAP)</p>
+                          <ul class="space-y-1 text-xs text-gray-700">
+                            <li class="flex items-start gap-2">
+                              <span class="text-purple-600 mt-0.5">•</span>
+                              <span>3-year Certification</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span class="text-purple-600 mt-0.5">•</span>
+                              <span>Duration: Self-Paced w/ Exam</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- The Architect -->
+              <div class="p-5 bg-white rounded-xl border-2 border-blue-200 shadow-sm cursor-pointer" onclick="toggleRole('architect')">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-12 h-12 rounded-full bg-orange-600 flex items-center justify-center flex-shrink-0">⚙️</div>
+                  <div class="flex-1"><h4 class="text-gray-900 font-medium">The Architect</h4><p class="text-xs text-gray-500">Design & Framework Development</p></div>
+                  <button class="text-blue-600"><span class="toggle-icon-architect">▼</span></button>
+                </div>
+                <div id="architect-details" class="expandable-content">
+                  <div class="mt-4 pt-4 border-t border-blue-200">
+                    <p class="text-xs uppercase tracking-wider text-blue-700 mb-3 font-medium">Qualifications</p>
+                    <div class="space-y-3">
+                      <div>
+                        <p class="text-xs font-medium text-gray-500 uppercase mb-2">UK</p>
+                        <ul class="space-y-1 text-sm text-gray-700">
+                          <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Level 6 Business Process Architecture certification</span>
+                          </li>
+                          <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>TOGAF or equivalent enterprise architecture qualification</span>
+                          </li>
+                          <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>5-7 years process architecture experience</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p class="text-xs font-medium text-gray-500 uppercase mb-2">US</p>
+                        <ul class="space-y-1 text-sm text-gray-700">
+                          <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Bachelor's degree in Systems Engineering or related field</span>
+                          </li>
+                          <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>CBPP (Certified Business Process Professional)</span>
+                          </li>
+                          <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>5-7 years process architecture experience</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- The Engineer -->
+              <div class="p-5 bg-white rounded-xl border-2 border-blue-200 shadow-sm cursor-pointer" onclick="toggleRole('engineer')">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-12 h-12 rounded-full bg-teal-600 flex items-center justify-center flex-shrink-0">🔧</div>
+                  <div class="flex-1"><h4 class="text-gray-900 font-medium">The Engineer</h4><p class="text-xs text-gray-500">Implementation & Automation</p></div>
+                  <button class="text-blue-600"><span class="toggle-icon-engineer">▼</span></button>
+                </div>
+                <div id="engineer-details" class="expandable-content">
+                  <div class="mt-4 pt-4 border-t border-blue-200">
+                    <p class="text-xs uppercase tracking-wider text-blue-700 mb-3 font-medium">Qualifications</p>
+                    <div class="space-y-3">
+                      <div>
+                        <p class="text-xs font-medium text-gray-500 uppercase mb-2">UK</p>
+                        <ul class="space-y-1 text-sm text-gray-700">
+                          <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Level 4 Process Engineering qualification</span>
+                          </li>
+                          <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Lean Six Sigma Yellow Belt or Green Belt</span>
+                          </li>
+                          <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>2-4 years process engineering experience</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p class="text-xs font-medium text-gray-500 uppercase mb-2">US</p>
+                        <ul class="space-y-1 text-sm text-gray-700">
+                          <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Associate or Bachelor's degree in Engineering or related field</span>
+                          </li>
+                          <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Six Sigma Yellow Belt or Green Belt</span>
+                          </li>
+                          <li class="flex items-start gap-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>2-4 years process engineering experience</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- FUNDAMENTALS CONTENT -->
+    <div id="fundamentals-content" class="tab-content">
+      <div class="p-6 shadow-lg border-2 border-purple-500 rounded-xl bg-white">
+        <div class="grid w-full grid-cols-3 mb-6 bg-gray-100 p-1">
+          <button class="fundamentals-subtab px-6 py-2 bg-white border-b-2 border-purple-500" data-subtab="services" onclick="switchSubTab('fundamentals','services')" style="color:#111827">Overview & Services</button>
+          <button class="fundamentals-subtab px-6 py-2 bg-transparent hover:bg-gray-200" data-subtab="contacts" onclick="switchSubTab('fundamentals','contacts')" style="color:#111827">FY26 Outcomes</button>
+          <button class="fundamentals-subtab px-6 py-2 bg-transparent hover:bg-gray-200" data-subtab="more" onclick="switchSubTab('fundamentals','more')" style="color:#111827">Key Contacts & Files</button>
+        </div>
+        
+        <div id="fundamentals-services" class="subtab-content active">
+          <div class="p-4 bg-purple-50 border-purple-100 rounded-lg border mb-6">
+            <h3 class="text-gray-900 mb-3 text-lg font-medium">Overview</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">Fundamental to process improvement and optimisation are process standards and governance to ensure we have the basics in place to be able to perform the work we (EBS) do.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div><h3 class="text-gray-900 mb-3 text-lg font-medium">Services we offer</h3><div class="space-y-2"><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Set the Global EBS standard for documenting processes and standard ways of working (SOPs)</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Deliver training to process improvement teams and wider EBS to consistently document and deeply understand processes</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Provide assurance against EBS standards and work with the service lines to develop plans to close gaps</p></div></div></div>
+            <div><h3 class="text-gray-900 mb-3 text-lg font-medium">What you get?</h3><div class="space-y-2"><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200"><div class="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Fit for purpose process maps and SOPs to support continuous improvement and future AI transformation</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200"><div class="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Single repository and one version of truth</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200"><div class="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Transparency on gaps to standard</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border border-gray-200"><div class="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Insights to identify biggest opportunities for improvement</p></div></div></div>
+          </div>
+        </div>
+
+        <!-- FY26 OUTCOMES TAB WITH ENHANCED GOVERNANCE MATRIX -->
+        <div id="fundamentals-contacts" class="subtab-content">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- LEFT SIDE: Outcomes Timeline -->
+            <div class="space-y-4">
+              <h3 class="text-gray-900 text-lg font-medium">25/26 Outcomes Timeline</h3>
+              <p class="text-sm text-gray-600 mb-6">Our aim during 25/26 is for all Service Lines to have the following outcomes in place. The Process Improvement team are in the process of engaging Service Lines leaders to create plans to close any gaps to achieve all outcomes.</p>
+              
+              <div class="relative space-y-4">
+                <div class="absolute left-8 top-12 bottom-12 w-0.5 bg-gradient-to-b from-blue-200 via-purple-200 to-red-200"></div>
+
+                <!-- Outcome 1 -->
+                <div class="flex items-start space-x-4 relative">
+                  <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0 z-10 shadow-xl border-4 border-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/></svg>
+                  </div>
+                  <div class="flex-1 p-4 bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow mt-2">
+                    <p class="text-xs text-blue-600 font-bold mb-1">O1 • Outcome 1</p>
+                    <p class="text-sm text-gray-900">E2E Process Map with L3 maturity data</p>
+                  </div>
+                </div>
+
+                <!-- Outcome 2 -->
+                <div class="flex items-start space-x-4 relative">
+                  <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center flex-shrink-0 z-10 shadow-xl border-4 border-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                  </div>
+                  <div class="flex-1 p-4 bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow mt-2">
+                    <p class="text-xs text-green-600 font-bold mb-1">O2 • Outcome 2</p>
+                    <p class="text-sm text-gray-900">E2E Architecture setup in Blueworks, SharePoint & Service Now</p>
+                  </div>
+                </div>
+
+                <!-- Outcome 3 -->
+                <div class="flex items-start space-x-4 relative">
+                  <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0 z-10 shadow-xl border-4 border-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </div>
+                  <div class="flex-1 p-4 bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow mt-2">
+                    <p class="text-xs text-purple-600 font-bold mb-1">O3 • Outcome 3</p>
+                    <p class="text-sm text-gray-900">All L4 Maps & SOPs stored in EBS repositories</p>
+                  </div>
+                </div>
+
+                <!-- Outcome 4 -->
+                <div class="flex items-start space-x-4 relative">
+                  <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0 z-10 shadow-xl border-4 border-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg>
+                  </div>
+                  <div class="flex-1 p-4 bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow mt-2">
+                    <p class="text-xs text-orange-600 font-bold mb-1">O4 • Outcome 4</p>
+                    <p class="text-sm text-gray-900">Review Cycles agreed</p>
+                  </div>
+                </div>
+
+                <!-- Outcome 5 -->
+                <div class="flex items-start space-x-4 relative">
+                  <div class="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center flex-shrink-0 z-10 shadow-xl border-4 border-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+                  </div>
+                  <div class="flex-1 p-4 bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow mt-2">
+                    <p class="text-xs text-teal-600 font-bold mb-1">O5 • Outcome 5</p>
+                    <p class="text-sm text-gray-900">E2E insights being delivered</p>
+                  </div>
+                </div>
+
+                <!-- Outcome 6 -->
+                <div class="flex items-start space-x-4 relative">
+                  <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center flex-shrink-0 z-10 shadow-xl border-4 border-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                  </div>
+                  <div class="flex-1 p-4 bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow mt-2">
+                    <p class="text-xs text-red-600 font-bold mb-1">O6 • Outcome 6</p>
+                    <p class="text-sm text-gray-900">Process documentation assurance and governance</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT SIDE: Enhanced Governance Matrix -->
+            <div class="space-y-4">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-gray-900 text-lg font-medium">Governance</h3>
+                <p class="text-xs text-gray-500 italic">Click service lines for detailed updates</p>
+              </div>
+              
+              <div class="p-8 bg-gradient-to-br from-white via-purple-50/30 to-white rounded-3xl border border-purple-100 shadow-2xl">
+                <!-- Legend -->
+                <div class="mb-8 flex items-center justify-center gap-8 text-xs pb-6 border-b border-purple-100">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 shadow-sm"></div>
+                    <span class="text-gray-600 font-medium">Complete</span>
+                  </div>
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-green-400 to-green-600 shadow-sm"></div>
+                    <span class="text-gray-600 font-medium">On Track</span>
+                  </div>
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-red-400 to-red-600 shadow-sm"></div>
+                    <span class="text-gray-600 font-medium">Off Track</span>
+                  </div>
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 shadow-sm"></div>
+                    <span class="text-gray-600 font-medium">Risk</span>
+                  </div>
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-2.5 h-2.5 rounded-full bg-gray-300 shadow-sm"></div>
+                    <span class="text-gray-600 font-medium">Not Started</span>
+                  </div>
+                </div>
+
+                <!-- Governance Table -->
+                <div class="overflow-x-auto">
+                  <table class="w-full text-xs" style="border-collapse: separate; border-spacing: 0;">
+                    <thead>
+                      <tr>
+                        <th class="px-6 py-4 text-center font-semibold text-purple-900 bg-gradient-to-br from-purple-50 to-purple-100 border-b-2 border-purple-200" style="min-width:90px">Outcome</th>
+                        <th class="px-4 py-4 text-center font-semibold bg-gradient-to-br from-purple-50 to-purple-100 border-b-2 border-purple-200 border-l border-purple-100"><a href="https://nationalgridplc-my.sharepoint.com/:p:/r/personal/dean_clark_nationalgrid_com/Documents/PF%20Update%20Slide.pptx?d=w598f51e8ac3d40639ce0343e1b004dc2&csf=1&web=1&e=HMZUEE&nav=eyJzSWQiOjI1NywiY0lkIjozNTQxNzI1OTIxfQ" target="_blank" rel="noopener noreferrer" class="text-purple-900 hover:text-purple-700 transition-colors inline-flex items-center gap-1.5 justify-center"><span class="hover:underline">PtP UK</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600 opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></a></th>
+                        <th class="px-4 py-4 text-center font-semibold bg-gradient-to-br from-purple-50 to-purple-100 border-b-2 border-purple-200 border-l border-purple-100"><a href="https://nationalgridplc-my.sharepoint.com/:p:/r/personal/dean_clark_nationalgrid_com/Documents/PF%20Update%20Slide.pptx?d=w598f51e8ac3d40639ce0343e1b004dc2&csf=1&web=1&e=UrrHcl&nav=eyJzSWQiOjI2MiwiY0lkIjo1NjYzODcxNzF9" target="_blank" rel="noopener noreferrer" class="text-purple-900 hover:text-purple-700 transition-colors inline-flex items-center gap-1.5 justify-center"><span class="hover:underline">PtP US</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600 opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></a></th>
+                        <th class="px-4 py-4 text-center font-semibold bg-gradient-to-br from-purple-50 to-purple-100 border-b-2 border-purple-200 border-l border-purple-100"><a href="https://nationalgridplc-my.sharepoint.com/:p:/r/personal/dean_clark_nationalgrid_com/Documents/PF%20Update%20Slide.pptx?d=w598f51e8ac3d40639ce0343e1b004dc2&csf=1&web=1&e=Frpzby&nav=eyJzSWQiOjI2NCwiY0lkIjoxNTMyNjcwNTk4fQ" target="_blank" rel="noopener noreferrer" class="text-purple-900 hover:text-purple-700 transition-colors inline-flex items-center gap-1.5 justify-center"><span class="hover:underline">OtC UK</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600 opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></a></th>
+                        <th class="px-4 py-4 text-center font-semibold bg-gradient-to-br from-purple-50 to-purple-100 border-b-2 border-purple-200 border-l border-purple-100"><a href="https://nationalgridplc-my.sharepoint.com/:p:/r/personal/dean_clark_nationalgrid_com/Documents/PF%20Update%20Slide.pptx?d=w598f51e8ac3d40639ce0343e1b004dc2&csf=1&web=1&e=ypc63G&nav=eyJzSWQiOjI2MywiY0lkIjozMjY3ODkzOTJ9" target="_blank" rel="noopener noreferrer" class="text-purple-900 hover:text-purple-700 transition-colors inline-flex items-center gap-1.5 justify-center"><span class="hover:underline">ED</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600 opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></a></th>
+                        <th class="px-4 py-4 text-center font-semibold bg-gradient-to-br from-purple-50 to-purple-100 border-b-2 border-purple-200 border-l border-purple-100"><a href="https://nationalgridplc-my.sharepoint.com/:p:/r/personal/dean_clark_nationalgrid_com/Documents/PF%20Update%20Slide.pptx?d=w598f51e8ac3d40639ce0343e1b004dc2&csf=1&web=1&e=cJgv78&nav=eyJzSWQiOjI2NiwiY0lkIjoyNDI3MDY3NDcxfQ" target="_blank" rel="noopener noreferrer" class="text-purple-900 hover:text-purple-700 transition-colors inline-flex items-center gap-1.5 justify-center"><span class="hover:underline">L&P</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600 opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></a></th>
+                        <th class="px-4 py-4 text-center font-semibold bg-gradient-to-br from-purple-50 to-purple-100 border-b-2 border-purple-200 border-l border-purple-100"><a href="https://nationalgridplc-my.sharepoint.com/:p:/r/personal/dean_clark_nationalgrid_com/Documents/PF%20Update%20Slide.pptx?d=w598f51e8ac3d40639ce0343e1b004dc2&csf=1&web=1&e=3RyLty&nav=eyJzSWQiOjI2NSwiY0lkIjo2MzU3MTM0MDd9" target="_blank" rel="noopener noreferrer" class="text-purple-900 hover:text-purple-700 transition-colors inline-flex items-center gap-1.5 justify-center"><span class="hover:underline">RtR</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600 opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></a></th>
+                        <th class="px-4 py-4 text-center font-semibold bg-gradient-to-br from-purple-50 to-purple-100 border-b-2 border-purple-200 border-l border-purple-100"><a href="https://nationalgridplc-my.sharepoint.com/:p:/r/personal/dean_clark_nationalgrid_com/Documents/PF%20Update%20Slide.pptx?d=w598f51e8ac3d40639ce0343e1b004dc2&csf=1&web=1&e=4bOoj2&nav=eyJzSWQiOjI2NywiY0lkIjo0MDc4NjM2MTMwfQ" target="_blank" rel="noopener noreferrer" class="text-purple-900 hover:text-purple-700 transition-colors inline-flex items-center gap-1.5 justify-center"><span class="hover:underline">PS</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600 opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></a></th>
+                        <th class="px-4 py-4 text-center font-semibold bg-gradient-to-br from-purple-50 to-purple-100 border-b-2 border-purple-200 border-l border-purple-100"><a href="https://nationalgridplc-my.sharepoint.com/:p:/r/personal/dean_clark_nationalgrid_com/Documents/PF%20Update%20Slide.pptx?d=w598f51e8ac3d40639ce0343e1b004dc2&csf=1&web=1&e=LOsHr9&nav=eyJzSWQiOjI2OCwiY0lkIjoyNDgxODE3MDUzfQ" target="_blank" rel="noopener noreferrer" class="text-purple-900 hover:text-purple-700 transition-colors inline-flex items-center gap-1.5 justify-center"><span class="hover:underline">ITSD</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600 opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></a></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Row 1: O1 -->
+                      <tr class="group hover:bg-purple-50/40 transition-all duration-200">
+                        <td class="px-6 py-5 text-center border-r border-purple-100">
+                          <div class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white font-bold shadow-lg">O1</div>
+                        </td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-50 to-orange-100 border-2 border-orange-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-orange-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-50 to-orange-100 border-2 border-orange-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-orange-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-red-50 to-red-100 border-2 border-red-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-red-800 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q3</span></div></td>
+                      </tr>
+                      
+                      <!-- Row 2: O2 -->
+                      <tr class="group hover:bg-purple-50/40 transition-all duration-200 border-t border-purple-100">
+                        <td class="px-6 py-5 text-center border-r border-purple-100">
+                          <div class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-green-600 text-white font-bold shadow-lg">O2</div>
+                        </td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-blue-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-blue-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-blue-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-blue-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-blue-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-blue-800 font-bold text-sm">Q3</span></div></td>
+                      </tr>
+                      
+                      <!-- Row 3: O3 -->
+                      <tr class="group hover:bg-purple-50/40 transition-all duration-200 border-t border-purple-100">
+                        <td class="px-6 py-5 text-center border-r border-purple-100">
+                          <div class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 text-white font-bold shadow-lg">O3</div>
+                        </td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-50 to-orange-100 border-2 border-orange-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-orange-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-50 to-orange-100 border-2 border-orange-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-orange-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-blue-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q3</span></div></td>
+                      </tr>
+                      
+                      <!-- Row 4: O4 -->
+                      <tr class="group hover:bg-purple-50/40 transition-all duration-200 border-t border-purple-100">
+                        <td class="px-6 py-5 text-center border-r border-purple-100">
+                          <div class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 text-white font-bold shadow-lg">O4</div>
+                        </td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-gray-600 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-gray-600 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-gray-600 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-gray-600 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-gray-600 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-gray-600 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-gray-600 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-gray-600 font-bold text-sm">Q4</span></div></td>
+                      </tr>
+                      
+                      <!-- Row 5: O5 -->
+                      <tr class="group hover:bg-purple-50/40 transition-all duration-200 border-t border-purple-100">
+                        <td class="px-6 py-5 text-center border-r border-purple-100">
+                          <div class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 text-white font-bold shadow-lg">O5</div>
+                        </td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q3</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-gray-600 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-gray-600 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-gray-600 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-gray-600 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-gray-600 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-gray-600 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-gray-600 font-bold text-sm">Q4</span></div></td>
+                      </tr>
+                      
+                      <!-- Row 6: O6 -->
+                      <tr class="group hover:bg-purple-50/40 transition-all duration-200 border-t border-purple-100">
+                        <td class="px-6 py-5 text-center border-r border-purple-100">
+                          <div class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-red-600 text-white font-bold shadow-lg">O6</div>
+                        </td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q4</span></div></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 shadow-md group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"><span class="text-green-800 font-bold text-sm">Q4</span></div></td>
+                      </tr>
+                      
+                      <!-- Row 7: Risk Assessment -->
+                      <tr class="border-t-4 border-purple-300 bg-gradient-to-br from-purple-50/50 to-white">
+                        <td class="px-6 py-5 text-center font-bold text-purple-900 border-r border-purple-100">Risk</td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><span class="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-gradient-to-br from-green-100 to-green-200 text-green-900 shadow-lg border border-green-300">Low</span></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><span class="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-gradient-to-br from-orange-100 to-orange-200 text-orange-900 shadow-lg border border-orange-300">Med</span></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><span class="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-gradient-to-br from-green-100 to-green-200 text-green-900 shadow-lg border border-green-300">Low</span></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><span class="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-gradient-to-br from-red-100 to-red-200 text-red-900 shadow-lg border border-red-300">High</span></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><span class="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-gradient-to-br from-orange-100 to-orange-200 text-orange-900 shadow-lg border border-orange-300">Med</span></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><span class="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-gradient-to-br from-orange-100 to-orange-200 text-orange-900 shadow-lg border border-orange-300">Med</span></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><span class="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-gradient-to-br from-orange-100 to-orange-200 text-orange-900 shadow-lg border border-orange-300">Med</span></td>
+                        <td class="px-4 py-5 text-center border-l border-purple-50"><span class="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-gradient-to-br from-orange-100 to-orange-200 text-orange-900 shadow-lg border border-orange-300">Med</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       <!-- Key Contacts & Files Tab WITH ICONS -->
+        <div id="fundamentals-more" class="subtab-content">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 class="text-gray-900 text-lg font-medium mb-4">Key Contacts</h3>
+              <p class="text-sm text-gray-600 mb-4">Process standards, Blueworks access, SOP SharePoint and Process Mapping training</p>
+              <div class="space-y-3">
+                <div class="p-3 bg-white rounded-lg border flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-gray-900">Karen Watkins</p>
+                    <a href="mailto:Karen.Watkins@nationalgrid.com" class="text-xs text-blue-600">Karen.Watkins@nationalgrid.com</a>
+                  </div>
+                </div>
+                <div class="p-3 bg-white rounded-lg border flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-gray-900">Dean Clark</p>
+                    <a href="mailto:Dean.Clark@nationalgrid.com" class="text-xs text-blue-600">Dean.Clark@nationalgrid.com</a>
+                  </div>
+                </div>
+              </div>
+              <h4 class="text-sm font-medium text-gray-900 mt-6 mb-3">Service Line Contacts</h4>
+              <div class="grid grid-cols-2 gap-3">
+                <div><p class="text-xs text-gray-500 uppercase mb-2">RtR</p><div class="space-y-2"><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-purple-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">Rebekah Thompson</p><a href="mailto:Rebekah.Thompson@nationalgrid.com" class="text-blue-600 block truncate">Rebekah.Thompson@nationalgrid.com</a></div></div><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-purple-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">Sharon Markham</p><a href="mailto:Sharon.Markham@nationalgrid.com" class="text-blue-600 block truncate">Sharon.Markham@nationalgrid.com</a></div></div></div></div>
+                <div><p class="text-xs text-gray-500 uppercase mb-2">PtP</p><div class="space-y-2"><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-purple-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">Jared Bechard</p><a href="mailto:Jared.Bechard3@nationalgrid.com" class="text-blue-600 block truncate">Jared.Bechard3@nationalgrid.com</a></div></div><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-purple-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">George Eden</p><a href="mailto:George.Eden@nationalgrid.com" class="text-blue-600 block truncate">George.Eden@nationalgrid.com</a></div></div></div></div>
+                <div><p class="text-xs text-gray-500 uppercase mb-2">People Support</p><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-purple-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">Jenna Tabolt</p><a href="mailto:Jenna.Tabolt@nationalgrid.com" class="text-blue-600 block truncate">Jenna.Tabolt@nationalgrid.com</a></div></div></div>
+                <div><p class="text-xs text-gray-500 uppercase mb-2">Other Service Lines</p><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-purple-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">Karen Watkins</p><a href="mailto:Karen.Watkins@nationalgrid.com" class="text-blue-600 block truncate">Karen.Watkins@nationalgrid.com</a></div></div></div>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-gray-900 text-lg font-medium mb-4">Supporting Files</h3>
+              <div class="space-y-2">
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-purple-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-purple-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">Process Standards</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-purple-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-purple-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">Process Training</p>
+                </a>
+                <a href="https://nationalgridplc.sharepoint.com/:w:/r/sites/ProcessingandSOPLibrary/Templates/EBS%20SOP%20Template%20160725.docx?d=wc22c0714d3e343a597887d88e2e9d3ee&csf=1&web=1&e=EJda2X" target="_blank" rel="noopener noreferrer" class="block p-3 bg-white rounded-lg border hover:border-purple-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-purple-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">SOP Template</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-purple-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-purple-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">SOP Guidelines</p>
+                </a>
+                <a href="https://www.ibm.com/products/blueworks-live" class="block p-3 bg-white rounded-lg border hover:border-purple-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-purple-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">Blueworks Live</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-purple-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-purple-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">SOP SharePoint</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-purple-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-purple-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">SOP ServiceNow</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ENGINEERING & AUTOMATION CONTENT -->
+    <div id="engineering-automation-content" class="tab-content">
+      <div class="p-6 shadow-lg border-2 border-orange-500 rounded-xl bg-white">
+        <div class="grid w-full grid-cols-3 mb-6 bg-gray-100 p-1">
+          <button class="engineering-automation-subtab px-6 py-2 bg-white border-b-2 border-orange-500" data-subtab="services" onclick="switchSubTab('engineering-automation','services')" style="color:#111827">Overview & Services</button>
+          <button class="engineering-automation-subtab px-6 py-2 bg-transparent hover:bg-gray-200" data-subtab="contacts" onclick="switchSubTab('engineering-automation','contacts')" style="color:#111827">Outcomes</button>
+          <button class="engineering-automation-subtab px-6 py-2 bg-transparent hover:bg-gray-200" data-subtab="more" onclick="switchSubTab('engineering-automation','more')" style="color:#111827">Key Contacts & Files</button>
+        </div>
+
+        <div id="engineering-automation-services" class="subtab-content active">
+          <div class="p-4 bg-orange-50 border-orange-100 rounded-lg border mb-6">
+            <h3 class="text-gray-900 mb-3 text-lg font-medium">Overview</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">Powered by the ESOAR methodology, our Process Engineering and Automation capability streamlines and digitizes our EBS processes to deliver improvements in Efficiency, Effectiveness and Experience (3Es). <button onclick="toggleFramework()" class="text-orange-600 hover:text-orange-700 underline cursor-pointer ml-1"><span id="framework-toggle-text">See Framework</span></button></p>
+          </div>
+
+          <!-- Framework Content -->
+          <div id="framework-content" class="expandable-content mb-6">
+            <div class="p-4 bg-orange-50 rounded-lg border-2 border-orange-300 mb-6">
+              <p class="text-sm text-gray-800 leading-relaxed">In EBS we optimise our processes using the ESOAR methodology. It's the heartbeat to our process improvement activities. ESOAR is a structured framework made up of five key elements: Eliminate, Standardise, Optimise, Automate and Robotise. Using the elements individually or as a combination and help us significantly improve operational efficiency, reduce costs, and enhance overall performance. The systematic approach of ESOAR ensures continuous improvement and adaptation to meet the EBS "Outcomes".</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div class="space-y-4">
+                <div class="flex items-start space-x-4"><div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0"><span class="text-white font-bold text-xl">E</span></div><div class="flex-1 p-3 bg-white rounded-lg border"><p class="text-sm text-gray-800"><span class="font-medium">Eliminate</span> - This step focuses on identifying and removing activities that do not add value to the business. It could involve eliminating redundant tasks, outdated procedures, or inefficient processes which leads to removing unnecessary and wasteful processes to streamline operations.</p></div></div>
+                <div class="flex items-start space-x-4"><div class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center flex-shrink-0"><span class="text-white font-bold text-xl">S</span></div><div class="flex-1 p-3 bg-white rounded-lg border"><p class="text-sm text-gray-800"><span class="font-medium">Standardise</span> - Standardisation involves developing standard templates, procedures, and guidelines for common tasks or best practices in maintaining consistency and ensuring that everyone follows best practice. Once standardised, these tasks become the foundation for future improvements.</p></div></div>
+                <div class="flex items-start space-x-4"><div class="w-12 h-12 bg-green-400 rounded-full flex items-center justify-center flex-shrink-0"><span class="text-white font-bold text-xl">O</span></div><div class="flex-1 p-3 bg-white rounded-lg border"><p class="text-sm text-gray-800"><span class="font-medium">Optimise</span> - The goal is to maximise the potential of current processes by identifying and implementing improvements. This phase aims to fine-tune workflows, utilise resources better, and eliminate inefficiencies. Many optimisation techniques can be used and leveraged in this step such as continuous improvement, benchmarking, and technology.</p></div></div>
+                <div class="flex items-start space-x-4"><div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0"><span class="text-white font-bold text-xl">A</span></div><div class="flex-1 p-3 bg-white rounded-lg border"><p class="text-sm text-gray-800"><span class="font-medium">Automate</span> - Use technology to automate repetitive and manual tasks This involves leveraging the existing systems and tools to automate manual processes. For instance, using workflows in SAP to automate tasks like invoice processing, approval workflows, and data entry.</p></div></div>
+                <div class="flex items-start space-x-4"><div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0"><span class="text-white font-bold text-xl">R</span></div><div class="flex-1 p-3 bg-white rounded-lg border"><p class="text-sm text-gray-800"><span class="font-medium">Robotise</span> - Apply advanced robotic technologies to further automate complex processes. This involves using software robots or "bots" to mimic human actions and handle high-volume, repetitive tasks across multiple systems.</p></div></div>
+              </div>
+              <div class="space-y-3">
+                <div class="p-4 bg-blue-900 rounded-lg"><p class="text-white font-medium">Step 1: Map Current Processes</p></div>
+                <div class="p-4 bg-blue-900 rounded-lg"><p class="text-white font-medium">Step 2: Collect Performance Data</p></div>
+                <div class="p-4 bg-green-500 rounded-lg"><p class="text-white font-medium">Step 3: Identify VA, NNVA, and NVA Activities</p></div>
+                <div class="p-4 bg-green-500 rounded-lg"><p class="text-white font-medium">Step 4: Identify Waste in Processes</p></div>
+                <div class="p-4 bg-orange-300 rounded-lg"><p class="text-white font-medium">Step 5: Eliminate Non-Value-Adding Activities</p></div>
+                <div class="p-4 bg-pink-600 rounded-lg"><p class="text-white font-medium">Step 6: Standardise VA and NNVA Activities</p></div>
+                <div class="p-4 bg-green-400 rounded-lg"><p class="text-white font-medium">Step 7: Optimise VA and NNVA Activities</p></div>
+                <div class="p-4 bg-red-500 rounded-lg"><p class="text-white font-medium">Step 8: Automate Repetitive Tasks</p></div>
+                <div class="p-4 bg-blue-500 rounded-lg"><p class="text-white font-medium">Step 9: Robotise Complex Processes</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="services-content">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div><h3 class="text-gray-900 mb-3 text-lg font-medium">Services we offer</h3><div class="space-y-2"><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Facilitation of process improvement using ESOAR methodology</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Process Diagnostic and deep dive recommendations</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Process Improvement delivery support</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">A3 problem solving facilitation</p></div></div></div>
+              <div><h3 class="text-gray-900 mb-3 text-lg font-medium">What you get?</h3><div class="space-y-2"><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Improvements in effectiveness and efficiency</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Data driven insights and actions</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Delivery of recommendations</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Automation of process steps</p></div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="engineering-automation-contacts" class="subtab-content">
+          <div class="p-4 bg-orange-50 rounded-lg border-2 border-orange-300 mb-6">
+            <h3 class="text-gray-900 mb-2 text-lg font-medium">ESOAR Outcomes</h3>
+            <p class="text-sm text-gray-800 leading-relaxed">In EBS we optimise our processes using the ESOAR methodology to deliver measurable improvements in Efficiency, Effectiveness and Experience across all service lines.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="p-6 bg-white rounded-xl border-2 border-orange-200"><h4 class="text-gray-900 font-medium mb-3">Efficiency</h4><p class="text-sm text-gray-600">Reduce time and resources required for process execution</p></div>
+            <div class="p-6 bg-white rounded-xl border-2 border-orange-200"><h4 class="text-gray-900 font-medium mb-3">Effectiveness</h4><p class="text-sm text-gray-600">Improve quality and accuracy of process outputs</p></div>
+            <div class="p-6 bg-white rounded-xl border-2 border-orange-200"><h4 class="text-gray-900 font-medium mb-3">Experience</h4><p class="text-sm text-gray-600">Enhance user satisfaction and process usability</p></div>
+          </div>
+        </div>
+
+        <!-- Key Contacts & Files Tab WITH ICONS -->
+        <div id="engineering-automation-more" class="subtab-content">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 class="text-gray-900 text-lg font-medium mb-4">Key Contacts</h3>
+              <p class="text-sm text-gray-600 mb-4">Process Engineer Framework, guidance and training</p>
+              <div class="space-y-3">
+                <div class="p-3 bg-white rounded-lg border flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-gray-900">Dean Clark</p>
+                    <a href="mailto:Dean.Clark@nationalgrid.com" class="text-xs text-blue-600">Dean.Clark@nationalgrid.com</a>
+                  </div>
+                </div>
+                <div class="p-3 bg-white rounded-lg border flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-gray-900">Azeem Abdul</p>
+                    <a href="mailto:Azeem.Abdul@nationalgrid.com" class="text-xs text-blue-600">Azeem.Abdul@nationalgrid.com</a>
+                  </div>
+                </div>
+              </div>
+              <h4 class="text-sm font-medium text-gray-900 mt-6 mb-3">Service Line Contacts</h4>
+              <div class="grid grid-cols-2 gap-3">
+                <div><p class="text-xs text-gray-500 uppercase mb-2">RtR</p><div class="space-y-2"><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">Rebekah Thompson</p><a href="mailto:Rebekah.Thompson@nationalgrid.com" class="text-blue-600 block truncate">Rebekah.Thompson@nationalgrid.com</a></div></div><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">Sharon Markham</p><a href="mailto:Sharon.Markham@nationalgrid.com" class="text-blue-600 block truncate">Sharon.Markham@nationalgrid.com</a></div></div></div></div>
+                <div><p class="text-xs text-gray-500 uppercase mb-2">PtP</p><div class="space-y-2"><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">Jared Bechard</p><a href="mailto:Jared.Bechard3@nationalgrid.com" class="text-blue-600 block truncate">Jared.Bechard3@nationalgrid.com</a></div></div><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">George Eden</p><a href="mailto:George.Eden@nationalgrid.com" class="text-blue-600 block truncate">George.Eden@nationalgrid.com</a></div></div></div></div>
+                <div><p class="text-xs text-gray-500 uppercase mb-2">People Support</p><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">Jenna Tabolt</p><a href="mailto:Jenna.Tabolt@nationalgrid.com" class="text-blue-600 block truncate">Jenna.Tabolt@nationalgrid.com</a></div></div></div>
+                <div><p class="text-xs text-gray-500 uppercase mb-2">Other Service Lines</p><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">Elizabeth Smith</p><a href="mailto:Elizabeth.Smith@nationalgrid.com" class="text-blue-600 block truncate">Elizabeth.Smith@nationalgrid.com</a></div></div></div>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-gray-900 text-lg font-medium mb-4">Supporting Files</h3>
+              <div class="space-y-2">
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-orange-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-orange-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">Swim Lane Template</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-orange-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-orange-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">SIPOC Template</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-orange-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-orange-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">Lean Wastes Poster</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-orange-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-orange-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">Waste Capture Form</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-orange-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-orange-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">Process Training</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-orange-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-orange-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">ESOAR Workbook</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-orange-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-orange-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">ESOAR Examples</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-orange-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-orange-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">Process Data & Performance Capture Sheet</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-orange-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-orange-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">VA, NNVA and NVA Poster</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-orange-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-orange-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">A3 Template</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-orange-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-orange-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">A3 Guide</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- PERFORMANCE EVOLUTION CONTENT -->
+    <div id="performance-evolution-content" class="tab-content">
+      <div class="p-6 shadow-lg border-2 border-teal-500 rounded-xl bg-white">
+        <div class="grid w-full grid-cols-3 mb-6 bg-gray-100 p-1">
+          <button class="performance-evolution-subtab px-6 py-2 bg-white border-b-2 border-teal-500" data-subtab="services" onclick="switchSubTab('performance-evolution','services')" style="color:#111827">Overview & Services</button>
+          <button class="performance-evolution-subtab px-6 py-2 bg-transparent hover:bg-gray-200" data-subtab="contacts" onclick="switchSubTab('performance-evolution','contacts')" style="color:#111827">Outcomes</button>
+          <button class="performance-evolution-subtab px-6 py-2 bg-transparent hover:bg-gray-200" data-subtab="more" onclick="switchSubTab('performance-evolution','more')" style="color:#111827">Key Contacts & Files</button>
+        </div>
+
+        <div id="performance-evolution-services" class="subtab-content active">
+          <div class="p-4 bg-teal-50 border-teal-100 rounded-lg border mb-6">
+            <h3 class="text-gray-900 mb-3 text-lg font-medium">Overview</h3>
+            <p class="text-sm text-gray-700 leading-relaxed">How we continuously evolve our services to deliver target business outcomes over a three-year horizon</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div><h3 class="text-gray-900 mb-3 text-lg font-medium">Services We Offer</h3><div class="space-y-2"><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Three-year strategic roadmap development</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Performance measurement and KPI design</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Continuous improvement program management</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Benchmarking and competitive analysis</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Innovation pipeline development</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Outcome-based transformation initiatives</p></div></div></div>
+            <div><h3 class="text-gray-900 mb-3 text-lg font-medium">What You Get</h3><div class="space-y-2"><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Clear three-year improvement trajectory</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Measurable business outcome improvements</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Strategic alignment across service lines</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Innovation culture and capabilities</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Competitive advantage through excellence</p></div><div class="flex items-start space-x-3 p-3 bg-white rounded-lg border"><div class="w-1.5 h-1.5 bg-teal-500 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm text-gray-700">Sustainable performance improvement</p></div></div></div>
+          </div>
+        </div>
+
+        <div id="performance-evolution-contacts" class="subtab-content">
+          <div class="p-4 bg-teal-50 rounded-lg border-2 border-teal-300 mb-6">
+            <h3 class="text-gray-900 mb-2 text-lg font-medium">Strategic Performance Evolution</h3>
+            <p class="text-sm text-gray-800 leading-relaxed">Long-term strategic approach to measuring and improving performance across all service lines through data-driven decision making and innovation.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="p-6 bg-white rounded-xl border-2 border-teal-200"><h4 class="text-gray-900 font-medium mb-3">Year 1: Foundation</h4><p class="text-sm text-gray-600">Baseline establishment, KPI design, and initial measurement frameworks</p></div>
+            <div class="p-6 bg-white rounded-xl border-2 border-teal-200"><h4 class="text-gray-900 font-medium mb-3">Year 2: Optimization</h4><p class="text-sm text-gray-600">Process refinement, scaling best practices, and performance acceleration</p></div>
+            <div class="p-6 bg-white rounded-xl border-2 border-teal-200"><h4 class="text-gray-900 font-medium mb-3">Year 3: Excellence</h4><p class="text-sm text-gray-600">Innovation integration, competitive benchmarking, and sustained leadership</p></div>
+          </div>
+        </div>
+
+        <!-- Key Contacts & Files Tab WITH ICONS -->
+        <div id="performance-evolution-more" class="subtab-content">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 class="text-gray-900 text-lg font-medium mb-4">Key Contacts</h3>
+              <p class="text-sm text-gray-600 mb-4">Performance Evolution leadership and guidance</p>
+              <div class="space-y-3">
+                <div class="p-3 bg-white rounded-lg border flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-gray-900">Karen Watkins</p>
+                    <a href="mailto:Karen.Watkins@nationalgrid.com" class="text-xs text-blue-600">Karen.Watkins@nationalgrid.com</a>
+                  </div>
+                </div>
+                <div class="p-3 bg-white rounded-lg border flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-gray-900">Dean Clark</p>
+                    <a href="mailto:Dean.Clark@nationalgrid.com" class="text-xs text-blue-600">Dean.Clark@nationalgrid.com</a>
+                  </div>
+                </div>
+              </div>
+              <h4 class="text-sm font-medium text-gray-900 mt-6 mb-3">Service Line Contacts</h4>
+              <div class="grid grid-cols-2 gap-3">
+                <div><p class="text-xs text-gray-500 uppercase mb-2">RtR</p><div class="space-y-2"><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">Rebekah Thompson</p><a href="mailto:Rebekah.Thompson@nationalgrid.com" class="text-blue-600 block truncate">Rebekah.Thompson@nationalgrid.com</a></div></div><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">Sharon Markham</p><a href="mailto:Sharon.Markham@nationalgrid.com" class="text-blue-600 block truncate">Sharon.Markham@nationalgrid.com</a></div></div></div></div>
+                <div><p class="text-xs text-gray-500 uppercase mb-2">PtP</p><div class="space-y-2"><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">Jared Bechard</p><a href="mailto:Jared.Bechard3@nationalgrid.com" class="text-blue-600 block truncate">Jared.Bechard3@nationalgrid.com</a></div></div><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">George Eden</p><a href="mailto:George.Eden@nationalgrid.com" class="text-blue-600 block truncate">George.Eden@nationalgrid.com</a></div></div></div></div>
+                <div><p class="text-xs text-gray-500 uppercase mb-2">People Support</p><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">Jenna Tabolt</p><a href="mailto:Jenna.Tabolt@nationalgrid.com" class="text-blue-600 block truncate">Jenna.Tabolt@nationalgrid.com</a></div></div></div>
+                <div><p class="text-xs text-gray-500 uppercase mb-2">Other Service Lines</p><div class="p-2 bg-white rounded border text-xs flex items-start gap-2"><div class="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center flex-shrink-0 mt-0.5"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><p class="font-medium text-gray-900">Karen Watkins</p><a href="mailto:Karen.Watkins@nationalgrid.com" class="text-blue-600 block truncate">Karen.Watkins@nationalgrid.com</a></div></div></div>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-gray-900 text-lg font-medium mb-4">Tools & Templates</h3>
+              <div class="space-y-2">
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-teal-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-teal-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">Strategic Roadmap Template</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-teal-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-teal-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">KPI Dashboard Builder</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-teal-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-teal-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">Innovation Project Canvas</p>
+                </a>
+                <a href="#" class="block p-3 bg-white rounded-lg border hover:border-teal-300 flex items-center gap-3 transition-colors">
+                  <div class="w-8 h-8 rounded bg-teal-50 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-600"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <p class="text-sm text-gray-900">Performance Review Toolkit</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    let currentTopTab='capability',currentSubTabs={capability:'overview',fundamentals:'services','engineering-automation':'services','performance-evolution':'services'},frameworkVisible=false;
+    function switchTopTab(t){currentTopTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));const e=document.getElementById(t+'-content');e&&e.classList.add('active');document.querySelectorAll('.top-tab').forEach(e=>{e.classList.remove('border-blue-900','border-purple-500','border-orange-500','border-teal-500'),e.classList.add('border-gray-200')});const a=document.querySelector(`[data-tab="${t}"]`);a&&(a.classList.remove('border-gray-200'),'capability'===t?a.classList.add('border-blue-900'):'fundamentals'===t?a.classList.add('border-purple-500'):'engineering-automation'===t?a.classList.add('border-orange-500'):'performance-evolution'===t&&a.classList.add('border-teal-500'))}
+    function switchSubTab(t,e){currentSubTabs[t]=e;const a=document.getElementById(t+'-content');if(!a)return;a.querySelectorAll('.subtab-content').forEach(t=>t.classList.remove('active'));const s=document.getElementById(t+'-'+e);s&&s.classList.add('active');const r=t+'-subtab';a.querySelectorAll('.'+r).forEach(t=>{t.classList.remove('bg-white','shadow-sm','border-2','border-blue-900','border-purple-500','border-orange-500','border-teal-500','border-b-2'),'capability'!==t&&t.classList.add('bg-transparent','hover:bg-gray-200')});const b=a.querySelector(`[data-subtab="${e}"]`);b&&('capability'===t?b.classList.add('bg-white','shadow-sm','border-2','border-blue-900'):(b.classList.remove('bg-transparent','hover:bg-gray-200'),b.classList.add('bg-white','border-b-2'),'fundamentals'===t?b.classList.add('border-purple-500'):'engineering-automation'===t?b.classList.add('border-orange-500'):'performance-evolution'===t&&b.classList.add('border-teal-500')))}
+    function toggleRole(t){const e=document.getElementById(t+'-details'),a=document.querySelector('.toggle-icon-'+t);e&&(e.classList.toggle('expanded'),a&&(a.textContent=e.classList.contains('expanded')?'▲':'▼'))}
+    function toggleServiceLine(t){const e=document.getElementById(t+'-details'),a=document.querySelector('.service-toggle-'+t);e&&(e.classList.toggle('expanded'),a&&(a.textContent=e.classList.contains('expanded')?'▲ Hide':'▼ Details'))}
+    function toggleFramework(){frameworkVisible=!frameworkVisible;const e=document.getElementById('framework-content'),t=document.getElementById('framework-toggle-text'),a=document.getElementById('services-content');e&&t&&a&&(frameworkVisible?(e.classList.add('expanded'),t.textContent='Hide Framework',a.style.display='none'):(e.classList.remove('expanded'),t.textContent='See Framework',a.style.display='block'))}
+  </script>
+</body>
+</html>
